@@ -1,0 +1,156 @@
+
+<section ng-controller="OrdersController" ng-init="historyUser()"  layout="row" layout-align="center center">
+
+<md-content  style="opacity:0.9;margin:5em;" layout="row">
+<div  style="opacity:0.9;">
+	
+	   <p ng-show="pendingOrder.length===0">Δεν έχετε παραγγείλει ακόμα σε κανένα πρατήριο,
+   Δείτε ποια πρατήρια μπορούν να σας εξυπυρετήσουν <button  class="btn  btn-info" ui-sref="UserHome.homePage" >
+	
+								  Eδω
+								  
+								</button></p>
+	
+	
+	   <md-list ng-show="pendingOrder.length" flex="">
+			<md-subheader  class="md-no-sticky">Παραγγελίες υπο διεκπαιρέωση</md-subheader>
+		 
+		  <md-list layout-padding>
+			<md-list-item layout-align="center center" class="md-whiteframe-17dp md-2-line" style="background-color:white;opacity:0.9;padding:1em;" ng-repeat="order in pendingOrder" >
+				
+				
+				
+				<div class="md-list-item-text">
+					<div layout="column">
+					<h3 ><b>Όνομα Πρατηρίου:</b>&nbsp; {{order.companyname}}</h3> 
+					<h3 ><b>Κόστος παραγγελίας:</b>&nbsp;{{order.pricetp}}€</h3>
+					<h3 ><b>Ημερομμηνια ολοκλήρωσης:</b>&nbsp; {{order.duedate}}</h3> 
+					<h3 ><b>Ποσότητα:</b>&nbsp; {{order.quantity}}λίτρα</h3>
+						
+					</div>
+					<md-divider ></md-divider>
+				
+				</div>
+				<div layout="column">
+					<span >
+								<button  class="btn  btn-warning" ng-click="remove(order._id,pendingOrder,order);" >
+	
+								  Ακύρωση Παραγγελίας
+								  
+								</button>
+						</span>
+					
+					
+						
+					
+				</div>
+				
+			</md-list-item>
+		 </md-list>
+   
+   
+</div>
+<div  ng-show="finishOrder.length" style="opacity:0.9;">
+	
+	   <md-list flex="">
+			<md-subheader  class="md-no-sticky">Παραγγελίες που ολοκληρώθηκαν</md-subheader>
+		 
+		  <md-list layout-padding>
+			<md-list-item layout-align="center center" class="md-whiteframe-17dp md-2-line" style="background-color:white;opacity:0.9;padding:1em;" ng-repeat="order in finishOrder" >
+				
+				
+				<p ng-show="!finishOrder.length">Δεν έχετε ολοκληρωμένες παραγγελίες</p>
+				<div class="md-list-item-text">
+					<div layout="column">
+						<h3 ><b>Όνομα Πρατηρίου:</b>&nbsp; {{order.companyname}}</h3> 
+					<h3 ><b>Κόστος παραγγελίας:</b>&nbsp;{{order.pricetp}}€</h3>
+					<h3 ><b>Ημερομμηνια ολοκλήρωσης:</b>&nbsp; {{order.duedate}}</h3> 
+					<h3 ><b>Ποσότητα:</b>&nbsp; {{order.quantity}}λίτρα</h3>
+						
+					</div>
+					<md-divider ></md-divider>
+				
+				</div>
+				<div layout="column">
+					<span >
+								<button style="width:7em;" class="btn  btn-warning" ng-click="remove(order._id,pendingOrder,order);" >
+	
+								  <i class="glyphicon glyphicon-trash"></i> 
+								  
+								</button>
+						</span>
+			
+					
+				</div>
+				
+			</md-list-item>
+		 </md-list>
+   
+   
+</div>
+</md-content>
+ <!--
+  <div style="margin-bottom:3em;color:gray"class="text-center">
+    <h1>Οι παραγγελίες μου</h1>
+  </div>
+   <div class="row" style="margin-right:3em;margin-left:5em;">
+	 <span class="col-sm-3 col-md-3 text-center" style="border-style:solid;background-color:white;">ΤΡΕΧΩΝ ΠΑΡΑΓΓΕΛΙΕΣ</span>	<span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Hμερομηνία διεκπαιρέωσης</span> <span  class="col-sm-2 col-md-2 text-center"  style="text-decoration:underline;">Όνομα εταιρείας</span><span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Είδος Παραγγελίας</span><span  class="col-sm-1 col-md-1 text-center"  style="text-decoration:underline;">Ποσό</span> </span><span   style="text-decoration:underline;" class="text-center col-sm-2 col-md-2">Λίτρα</span>
+
+  </div>
+  <hr>
+  <div class="row">
+	   <nav >
+	   
+		   <ul class="nav nav-pills nav-stacked" style="margin-right:3em;margin-left:5em;">
+				
+				
+				<li  ng-repeat="order in pendingOrder">
+					<span id="viewcompany" style="height:3em;" class="list-group-item text-center" >
+					  <span class="col-sm-3 col-md-3" >
+						<button style="position:relative;bottom:0.5em;width:5em;"  class="btn btn-md btn-primary" ng-click="remove(order._id,pendingOrder,order);">
+						  <i class="glyphicon glyphicon-trash"></i>
+						</button>
+					  </span>	<span  ng-bind="order.duedate" class="col-sm-2 col-md-2" ></span> <span  ng-bind="order.companyname" class="col-sm-2 col-md-2 "  > </span><span  class="col-sm-2 col-md-2 " ng-bind="order.typeOfOrder" > </span><span  class="col-sm-1 col-md-1  " ng-bind="order.pricetp" style="padding-left:3em;" ></span> <span  ng-bind="order.quantity"  style="padding-left:3em;" class="text-center col-sm-2 col-md-2"></span>
+
+					</span>
+				
+				</li>
+			</ul>
+		</nav>
+		
+  </div>
+  
+    <div class="row" style="margin-right:3em;margin-left:5em;">
+	 <span class="col-sm-3 col-md-3 text-center" style="border-style:solid;background-color:white;">ΟΛΟΚΛΗΡΩΜΕΝΕΣ ΠΑΡΑΓΓΕΛΙΕΣ</span>	<span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Hμερομηνία διεκπαιρέωσης</span> <span  class="col-sm-2 col-md-2 text-center"  style="text-decoration:underline;">Όνομα εταιρείας</span><span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Είδος Παραγγελίας</span><span  class="col-sm-1 col-md-1 text-center"  style="text-decoration:underline;">Ποσό</span> </span><span   style="text-decoration:underline;" class="text-center col-sm-2 col-md-2">Λίτρα</span>
+
+  </div>
+   <hr>
+  <div class="row">
+	   <nav >
+	   
+		   <ul class="nav nav-pills nav-stacked" style="margin-right:3em;margin-left:5em;">
+				
+				
+				<li  ng-repeat="order in finishOrder">
+					<span id="viewcompany" style="height:3em;" class="list-group-item text-center" >
+					  <span class="col-sm-3 col-md-3" >
+						<button style="position:relative;bottom:0.5em;width:5em;"  class="btn btn-md btn-primary" ng-click="remove(order._id,finishOrder,order);">
+						  <i class="glyphicon glyphicon-trash"></i>
+						</button>
+					  </span>	<span  ng-bind="order.duedate" class="col-sm-2 col-md-2" ></span> <span  ng-bind="order.companyname" class="col-sm-2 col-md-2 "  > </span><span  class="col-sm-2 col-md-2 " ng-bind="order.typeOfOrder" > </span><span  class="col-sm-1 col-md-1  " ng-bind="order.pricetp" style="padding-left:3em;" ></span> <span  ng-bind="order.quantity"  style="padding-left:3em;" class="text-center col-sm-2 col-md-2"></span>
+
+					</span>
+				
+				</li>
+			</ul>
+		</nav>
+		
+  </div>
+  -->
+  
+  
+  
+  
+  
+  
+</section>

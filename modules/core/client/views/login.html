@@ -1,0 +1,34 @@
+<span ng-controller="AuthenticationController">
+<md-card  style="padding-left:0;padding-right:0;"  >
+        <md-toolbar style="font-size: 200%;font-family: 'Limelight', cursive;">
+          <div style="background-color:#03A9F4;" class="md-toolbar-tools">
+            <h2><span >Είσοδος</span></h2>
+          </div>
+        </md-toolbar>
+        <md-card-content>
+          <form name="userForm" ng-submit="signin(userForm.$valid)">
+            <md-input-container class="md-block">
+              <label>Είσοδος</label>
+              <input type="text" name="username" ng-model="credentials.username" placeholder="username" required=""/>
+              <div ng-messages="userForm.username.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">Παρακαλώ εισάγετε username</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <input type="password" name="password" ng-model="credentials.password" placeholder="password" required="" md-maxlength="12"/>
+              <div ng-messages="userForm.password.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">Παρακαλώ εισάγετε κωδικό.</div>
+                <div ng-message="md-maxlength" class="my-message">ο κωδικός αποτελείται απο λιγότερα ψηφια.</div>
+              </div>
+            </md-input-container>
+			<span layout="row">
+            <md-button style="background-color:#03A9F4;" ng-click="cancel()" ng-disabled="!userForm.$valid" type="submit" class="md-raised md-primary">&nbsp Εισοδος &nbsp </md-button>
+		    <md-button class="md-raised md-accent" ng-click="cancel()" ui-sref="signup.role" class="md-raised md-primary">&nbsp Εγγραφη &nbsp </md-button>
+			</span>
+			<md-button class="md-raised md-warn" ng-click="cancel()" ui-sref="password.forgot" class="md-raised md-primary">&nbsp Ξεχασατε τον κωδικο σας; &nbsp </md-button>
+	   </form>
+        </md-card-content>
+		
+      </md-card>
+   </span>    

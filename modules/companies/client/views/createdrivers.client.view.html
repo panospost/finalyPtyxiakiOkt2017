@@ -1,0 +1,150 @@
+<section ng-controller="CompaniesController" ng-init="findOne()" flex layout="row" layout-align="center center">
+
+<div style="margin:5em;opacity:0.9;" flex-sm="100"  flex-gt-sm="90" flex-gt-md="50" flex-gt-lg="40" class="md-whiteframe-17dp">
+  <md-toolbar>
+  <div style="background-color:#03A9F4;" class="md-toolbar-tools">
+            <h2><span >Καταχωρήστε οδηγό για το πρατήρειο σας</span></h2>
+          </div>
+        </md-toolbar>
+  <md-content class="md-padding" >
+    
+      <form name="DriversForm" novalidate>
+
+    
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Όνομα:</label>
+            <input type="text" id="" name="firstName" ng-model="drivercred.firstName" required>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Eπώνυμο:</label>
+            <input type="text" id="lastName" name="lastName"  ng-model="drivercred.lastName" required>
+          </md-input-container>
+        </div>
+		
+	  <span layout-gt-sm="row">
+			<md-input-container  class="md-block" flex-gt-sm>
+				<label >Email:</label>
+				<input type="email" id="email" name="email" ng-model="drivercred.email"  lowercase required>
+				<div ng-messages="DriversForm.email.$error" role="alert">
+				<p class="help-block error-text" ng-message="required">Email address is required.</p>
+				<p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+				</div>
+				
+
+           
+		
+		  </span>
+	  
+	  
+       
+        
+
+        <span layout-gt-sm="row" >	
+			<md-input-container class="md-block" flex-gt-sm>
+          <label>Oνομα Χρήστη:</label>
+      <input type="text" id="username" name="username"  ng-model="drivercred.username" required>
+        <div ng-messages="DriversForm.username.$error" role="alert">
+				<p class="help-block error-text" ng-message="required">Το username του οδηγού απαιτείται</p>
+				
+				</div>
+		
+		</md-input-container>
+		
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Κωδικος:</label>
+            <input type="password" id="password1" name="password1"  ng-model="drivercred.password" required >
+			  <div ng-messages="DriversForm.password1.$error" role="alert">
+				<p class="help-block error-text" ng-message="required">Ο κωδικος του οδηγού απαιτείται</p>
+				
+				</div>
+
+		 </md-input-container>
+
+        
+
+          
+        </span>
+		
+		
+		
+		  <md-button class="md-primary md-raised md-hue-1" type="submit" ng-click="drivercreation(DriversForm.$valid,DriversForm)"
+					>Καταχώρηση Οδηγου</md-button>
+		  <div ng-show="error" class="text-center text-danger">
+	<strong ng-bind="error"></strong>
+	</div>
+	<div ng-show="donedriver" class="text-center text-danger">
+	<strong ng-bind="donedriver"></strong>
+	</div>	
+      </form>
+	 
+  </md-content>
+  </div>
+
+
+<!--
+<div style="margin-bottom:3em;color:gray"class="text-center">
+<h1 class="page-header">Καταχωρήστε τον οδηγό</h1>
+</div>
+
+<div class="row">
+<span class="col-md-4"></span>
+<form class="col-md-4" name="DriversForm" ng-submit="drivercreation(DriversForm.$valid,DriversForm)" class="" novalidate autocomplete="off">
+<div class="form-group" show-errors>
+<label for="firstName">Όνομα:</label>
+<input type="text" id="" name="firstName" class="form-control" ng-model="drivercred.firstName" placeholder="First Name" required>
+<div ng-messages="DriversForm.firstName.$error" role="alert">
+<p class="help-block error-text" ng-message="required">First name is required.</p>
+</div>
+</div>
+<div class="form-group" show-errors>
+<label for="lastName">Επίθετο:</label>
+<input type="text" id="lastName" name="lastName" class="form-control" ng-model="drivercred.lastName" placeholder="Last Name" required>
+<div ng-messages="DriversForm.lastName.$error" role="alert">
+<p class="help-block error-text" ng-message="required">Last name is required.</p>
+</div>
+</div>
+<div class="form-group" show-errors>
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" class="form-control" ng-model="drivercred.email" placeholder="Email" lowercase required>
+<div ng-messages="DriversForm.email.$error" role="alert">
+<p class="help-block error-text" ng-message="required">Email address is required.</p>
+<p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+</div>
+</div>
+<div class="form-group" show-errors>
+<label for="username">Όνομα Χρήστη(id):</label>
+<input type="text" id="username" name="username" class="form-control" ng-model="drivercred.username" placeholder="Username" lowercase required>
+<div ng-messages="DriversForm.username.$error" role="alert">
+<p class="help-block error-text" ng-message="required">Username is required.</p>
+</div>
+</div>
+<div class="form-group" show-errors>
+<label for="password">Κωδικός:</label>
+<input type="password" id="password" name="password" class="form-control" ng-model="drivercred.password" placeholder="Password" required ng-minlength="6">
+<div ng-messages="DriversForm.password.$error" role="alert">
+<p class="help-block error-text" ng-message="required">Password is required.</p>
+<p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+</div>
+</div>
+<div class="form-group" show-errors>
+<label for="epassword">Eπαλήθευση Κωδικού:</label>
+<input type="password"  id="epassword" name="epassword" compare="drivercred.password" class="form-control" ng-model="epassword" placeholder="Δώστε ξανα τον ίδιο κωδικό" required ng-minlength="6">
+<div ng-messages="DriversForm.epassword.$error" role="alert">
+<p ng-show="match" class="help-block error-text" ng-message="required">Οι κωδικοί δεν ταιριάζουν.</p>
+<div  ng-message="compareTo">Οι κωδικοί δεν ταιριάζουν</div>
+</div>
+</div>
+<button type="submit" class="btn btn-info text-center"><i class="fa fa-paper-plane"></i>&nbsp;Καταχώρηση Οδηγού</button>
+<div ng-show="error" class="text-center text-danger">
+<strong ng-bind="error"></strong>
+</div>
+<div ng-show="donedriver" class="text-center text-danger">
+<strong ng-bind="donedriver"></strong>
+</div>
+</form>
+<span class="col-md-4"></span>
+</div>-->
+</section>

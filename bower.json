@@ -1,0 +1,40 @@
+{
+  "name": "Epratirio",
+  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "homepage": "http://meanjs.org/",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3",
+    "angular": "~1.3",
+    "angular-resource": "~1.3",
+    "angular-animate": "~1.4.8",
+    "angular-mocks": "~1.3",
+    "angular-bootstrap": "~0.13",
+    "angular-ui-utils": "bower",
+    "angular-ui-router": "~0.2",
+    "angular-file-upload": "1.1.5",
+    "angular-messages": "~1.3.17",
+    "owasp-password-strength-test": "~1.3.0",
+    "angular-google-maps": "latest",
+    "angular-ui-sortable": "~0.13.4",
+    "pdfmake": "^0.1.20",
+    "angular-material": "latest",
+    "angular-re-captcha": "^0.2.0",
+    "angular-recaptcha": "^2.5.0",
+    "ngstorage": "^0.3.10",
+	"angular-simple-logger": "0.0.4"
+  },
+  "resolutions": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.4.8",
+    "angular-messages": "^1.4.8"
+  },
+  "overrides": {
+    "angular": {
+      "dependencies": {
+        "jquery": "*",
+        "jquery-ui": "*"
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+<section ng-controller="OrdersController" ng-init="findcompanies()">
+  <div class="page-header">
+    <h1>Παραγγείλτε αμεσα Πετρέλαιο θερμανσης </h1>
+  </div>
+  <div class="col-md-12">
+    <form name="orderForm" class="form-horizontal margin-bottom-sm" ng-submit="create(orderForm.$valid)" novalidate>
+      <fieldset layout="collumn">
+	  
+	   
+	  
+		
+         
+          
+		   
+				<md-select ng-model="company" placeholder="Διαλέξτε Πρατήρειο διανομής" ng-model-options="{trackBy: '$value.companyname'}">
+					<md-option ng-value="company" ng-repeat="company in companies">{{ company.companyname }}</md-option>
+				  </md-select>
+	   
+	   
+	   
+		
+	  
+        <div class="input-group" show-errors>
+          
+		  <span class="input-group-addon"><i class="fa fa-calendar "></i></span>
+          <input  style="width:250px;" name="duedate" type="date" ng-model="duedate" id="title" class="form-control" placeholder="Ημερομηνία Παραλαβής" required>
+          <div ng-messages="orderForm.duedate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">duedate is required.</p>
+          </div>
+        </div>
+		
+        <md-select ng-model="hour" placeholder="Διαλέξτε Ώρα διανομής" ng-model-options="{trackBy: '$value'}">
+					<md-option ng-value="hour" ng-repeat="hour in hours">{{ hour }}</md-option>
+		 </md-select>
+		
+	   <md-select ng-model="typeOfOrder" placeholder="Διαλέξτε Tυπο Παραγγελίας" ng-model-options="{trackBy: '$value'}">
+					<md-option ng-value="typeOfOrder" ng-repeat="typeOfOrder in tporder">{{ typeOfOrder }}</md-option>
+		 </md-select>
+	   
+	   
+	  <md-select ng-model="payment" placeholder="Διαλέξτε Τρόπο Πληρωμής" ng-model-options="{trackBy: '$value'}">
+					<md-option ng-value="payment" ng-repeat="payment in waypayment">{{ payment }}</md-option>
+		 </md-select>
+		
+		
+	   <md-input-container class="md-block" flex-gt-sm>
+            <label>Ποσοτητα</label>
+            <input name="postalCode" ng-model="quantity" placeholder=""
+                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+            <div ng-messages="userForm.quantity.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              
+            </div>
+          </md-input-container>
+		<md-input-container class="md-block" flex-gt-sm>
+            <label>Αριθμός ΔΕΗ</label>
+            <input name="postalCode" ng-model="dehnumber" placeholder=""
+                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+            <div ng-messages="userForm.quantity.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              
+            </div>
+          </md-input-container>
+		  <md-input-container class="md-block" flex-gt-sm>
+            <label>Πληρωτέο Ποσό</label>
+            <input name="postalCode" ng-model="pricetp" placeholder=""
+                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+            <div ng-messages="userForm.quantity.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              
+            </div>
+          </md-input-container>
+		  
+		  
+		  <md-input-container>
+		  <label>Κατι σχετικό με την Παραγγελία σας(Προαιρετικο)</label>
+		  <textarea ng-model="message"></textarea>
+		</md-input-container>
+	 
+	  
+	  
+	  
+        <div class="input-group">
+		
+			 <button type="submit" class="btn btn-default"><i class="fa fa-paper-plane"></i>&nbsp;Υποβολή Παραγγελίας</button>
+          
+        </div>
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+<section ng-controller="AuthenticationController">
+<div id="map-canvas"  >
+
+        <ui-gmap-google-map
+				
+                center='map.center'
+                zoom='map.zoom'
+                draggable="map.draggable"
+                options="options">
+            <ui-gmap-marker
+                    coords="marker.coords"
+                    options="marker.options"
+					 events="marker.events"
+                    idkey="marker.id">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+   </div>
+</section>

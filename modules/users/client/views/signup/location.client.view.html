@@ -1,0 +1,71 @@
+<section ng-controller="LocationController">
+	<span class="row">
+	<form name="locForm"  style="padding:2em;margin:1em;" ng-submit="next(locForm.$valid)" class="col-md-6">
+				
+				<div class="form-group " >
+					  <label for="area"> Νομός:</label>
+					  <div>
+						<select  style="width:250px;" name="area" class="form-control" placeholder="Διάλεξε Νομό" ng-model="credentials1.area" ng-options="choice for choice in areas" >
+									<option value="" disabled selected>Διαλέξτε Noμό</option>			
+							</select>
+							</div>
+							<div ng-messages="locForm.area.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">area is required.</p>
+					  </div>
+				   </div>
+					<div class="form-group" show-errors>
+					  <label for="city">Πόλη:</label>
+					  <input type="text" style="width:250px;" id="city" name="city" class="form-control" ng-model="credentials1.city" placeholder="Πχ Θεσσαλονίκη"  required>
+					  <div ng-messages="locForm.city.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">city is required.</p>
+					  </div>
+					</div>
+				
+					<div class="form-group " show-errors>
+						
+						
+						<div class="field" style="width:250px;" ng-model="credentials1.street" id="searchboxWrapper"><label>Η Διεύθυνση σας:</label></div>
+					<div ng-messages="locForm.address.$error" role="alert">
+					   <p class="help-block error-text" ng-message="minlength">Απαιτείται Σωστή διεύθυνση</p>
+					   <p class="help-block error-text" ng-message="required">Απαιτείται Σωστή διεύθυνση</p>				   
+					</div>
+					</div>	
+			
+					
+				
+				
+				<div class="form-group">
+							<button  class="btn-success btn" >Eπόμενο βημα</button>
+							<button class="btn btn-warning btn" type="button" ng-click="back()">Προηγούμενο Βήμα</button>
+			    </div>
+				
+				
+			</form>
+			
+				<span class=".col-md-6">
+
+					<div id="map-canvas1 "  >
+					<ui-gmap-google-map
+							control="map1.control"
+							center='map1.center'
+							zoom='map1.zoom'
+							draggable="map1.draggable"
+							options="options1">
+						<ui-gmap-marker
+								coords="marker1.coords"
+								options="marker1.options"
+								 events="marker1.events"
+								idkey="10">
+						</ui-gmap-marker>
+						<ui-gmap-search-box template="searchbox.template" parentdiv="'searchboxWrapper'" events="searchbox.events" position="BOTTOM_RIGHT"></ui-gmap-search-box>
+					</ui-gmap-google-map>
+					<script type="text/ng-template" id="searchbox.tpl.html">
+					   <input type="text" class="form-control" placeholder="Γράψτε την ακριβής διεύθυνση του σπιτιού σας.." name="credentials1.street" ng-model="credentials1.street" ng-minlength="5" required />
+					</script>	
+				</div>
+				<small>*Βεβαιωθείτε οτι ο δείκτης ειναι στην θέση του σπιτιού σας</small>
+					<small>Σε περίπτωση λάθους αφήστε εμας να βρούμε αυτόματα τις θέσεις σας.<button type="button" ng-click="getLocation()">Διόρθωση τοποθεσίας</button> </small>
+					<p><small>Aμα ακόμα υπάρχει πρόβλημα στείλτε email στο panospost1@gmail.com </small></p>
+				</span>
+			</span>
+</section>

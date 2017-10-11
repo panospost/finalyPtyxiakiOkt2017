@@ -1,0 +1,64 @@
+<section ng-controller="CompaniesController" ng-init="listDrivers()">
+  
+  <div style="margin-bottom:3em;color:gray"class="text-center">
+    <h1>Οι οδηγοι του πρατηρείου</h1>
+  </div>
+   <div class="row">
+   
+   <span style="margin-left:3em;" class="col-sm-2 col-md-2" >
+								
+						</span>
+	<span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Oνομα Oδηγού</span> <span   style="text-decoration:underline;" class="text-center col-sm-2 col-md-2">Επίθετο οδηγού</span> <span class="col-sm-2 col-md-2">Email Οδηγού</span>	
+ </div>
+ <hr>
+ </div>
+   <div class="row">
+	   <nav >
+	   
+		   <ul class="nav nav-pills nav-stacked">
+				
+				
+				<li  ng-repeat="company in drivers">
+				<span id="viewcompany" style="height:4em;margin-left:5em;margin-right:4em;" class="list-group-item " >
+				
+					<span class="col-sm-2 col-md-2" >
+								
+						</span>
+ 						
+						<span  class="col-sm-2 col-md-2 text-center"  ng-bind="company.firstName" ></span>  <span  ng-bind="company.lastName"  class="col-sm-2 col-md-2 text-center"></span>
+						<span class="col-sm-2 col-md-2 text-center" ng-bind="company.email">
+					
+					</span>
+					
+						
+					<span class="col-sm-1 col-md-1">
+								<button style="position:relative;bottom:0.5em;" class="btn  btn-info" ng-click="removeDriver( company._id,drivers,company)" >
+	
+								  Διαγραφή Οδηγού
+								  
+								</button>
+						</span>
+				</span>
+				</li>
+			</u>
+		</nav>
+		
+  </div>
+  
+  
+  <div class="alert alert-warning text-center" ng-if="companies1.$resolved && !companies1.length">
+   Δεν έχετε δημιουργήσει εταιρεία; <a ui-sref="company.create">Δημιουργήστε μια</a>?
+  </div>
+  
+
+		
+			
+			
+			
+			
+			  
+            
+       
+  
+  
+</section>

@@ -1,0 +1,55 @@
+<span >
+<md-card  style="padding-left:0;padding-right:0;"  >
+        <md-toolbar style="font-size: 200%;font-family: 'Limelight', cursive;">
+          <div style="background-color:#03A9F4;" class="md-toolbar-tools">
+            <h2><span >Εισάγετε την τοποθεσία του πρατηρίου με την βοήθεια του χάρτη</span></h2>
+          </div>
+        </md-toolbar>
+        <md-card-content layout="row">
+		<span layout="column">
+		Bήμα 1:
+		Εισάγετε την ακριβή διεύθυνση του πρατηρίου και
+	    επιλέξτε απο τις προτεινόμενες διευθύνσεις που εμφανίζονται.
+		<div   name="street" ng-model="preUser.street" id="searchboxWrapper" ><label>Η Διεύθυνση σας:</label>
+		</div>
+		Βημα 2:
+		Αν αδυνατείτε να βρείτε την διεύθυνση σας η δεν είστε ευχαριστημένος απο το Βήμα 1, γράψτε την πιο κοντινή γνωστή διεύθυνση που ξέρετε η έστω την Πόλη σας
+		(για να ζουμάρει ο χάρτης σε κοντινή περιοχή απο το σπίτι σας)
+		και χρησιμοποιήστε τον χάρτη, κρατωντας πατημένο το αριστερό κλικ πάνω στον κόκκινο δείκτη μπορείτε να τον σύρετε στην επιθυμητή θέση.
+		Μπορείτε να προσαρμόσετε και το ζουμ του χάρτη με τα κουμπία "+" και "-" που βρίσκονται στην δεξιά γωνία του χάρτη. Επίσης μπορείτε να μετατοπίσετε το κέντρο
+		του χάρτη κρατώντας πατημένο το αριστερό κλίκ σε οποιοδήποτε σημείο του χάρτη και σέρνοντας το ποντίκι(εικονίδιο χεράκι) 
+		
+		 <md-button class="md-raised md-primary" ng-click="hide(1)">ΑΠΟΘΗΚΕΥΣΗ</md-button>
+		 <md-button class="md-raised md-warn" ng-click="cancel()">ΑΚΥΡΩΣΗ</md-button>
+		
+         </span>
+		 <form name="mapForm" >
+            	<div id="map-canvas1 "  >
+					<ui-gmap-google-map
+							control="map1.control"
+							center='map1.center'
+							zoom='map1.zoom'
+							draggable="map1.draggable"
+							options="options1">
+						<ui-gmap-marker
+								coords="marker1.coords"
+								options="marker1.options"
+								 events="marker1.events"
+								idkey="10">
+						</ui-gmap-marker>
+						<ui-gmap-search-box   template="searchbox.template" parentdiv="'searchboxWrapper'" events="searchbox.events" ></ui-gmap-search-box>
+					</ui-gmap-google-map>
+					<script type="text/ng-template" id="searchbox.tpl.html">
+					   <input  type="text"   class="form-control" placeholder="Γράψτε την ακριβής διεύθυνση του σπιτιού σας.." name="preUser.street" ng-model="preUser.street" ng-minlength="5" required />
+					</script>	
+						
+				</div>
+				
+				
+			
+			
+	   </form>
+        </md-card-content>
+		
+      </md-card>
+   </span>    

@@ -1,0 +1,36 @@
+<section style="opacity:0.9;" ng-controller="SettingsController" flex layout="row" layout-align="center center" >
+
+  
+  <div style="opacity:0.9;margin-right:1em;" flex-sm="50"  flex-gt-sm="60" flex-gt-md="40" flex-gt-lg="20" class="md-whiteframe-17dp">
+	<md-content >
+	<div class="page-header text-center" >
+    <h1>Μενού Ρυθμίσεων</h1>
+  </div>
+   <nav >
+      <ul class="nav nav-pills nav-stacked">
+        <li ui-sref-active="active">
+          <a style="cursor:pointer"  ng-click="settingsProfile($event)">Επεξεργασία Προφίλ</a>
+        </li>
+        <li ui-sref-active="active">
+          <a style="cursor:pointer" ng-controller="SignUpController" ng-click="settingsMap($event)">Επεξεργασία τοποθεσίας</a>
+        </li>
+		<li ui-sref-active="active">
+          <a style="cursor:pointer"  ng-controller="SignUpController" ng-click="enallaktikiTopo8esia($event)">Επεξεργασία εναλλακτικής τοποθεσίας</a>
+        </li>
+        <li ui-sref-active="active" ng-show="user.provider === 'local'">
+          <a style="cursor:pointer"  ng-click="settingsPass($event)">Αλλαγή διαπιστευτηρίων</a>
+        </li>
+        
+      </ul>
+    </nav>
+	</md-content>
+	</div>
+	<!--
+    <div flex-gt-sm="50" flex-gt-md="400" flex-gt-lg="30" class="md-whiteframe-17dp" layout-align="center center"  >
+      <md-content>
+	  <div ui-view></div>
+	  </md-content>
+    </div>
+ -->
+  
+</section>

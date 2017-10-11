@@ -1,0 +1,27 @@
+<section ng-controller="HomeController" flex layout="row" layout-align="center center">
+
+
+		<div flex-sm="100" flex-gt-sm="90" flex-gt-md="40" flex-gt-lg="20" class="md-whiteframe-17dp">
+			<md-content class="md-padding">
+				<form name="contactForm">
+					<md-input-container style="display:block;">
+						<label>	Username:</label>
+						<input type="text" ng-model="contactName" required/>
+					</md-input-container>
+					<md-input-container style="display:block;">
+						<label>E-mail:</label>
+						<input type="email" ng-model="email" required/>
+					</md-input-container>
+					<md-input-container style="display:block;">
+					<label>Μήνυμα:</label>
+						<textarea  ng-model="contactMsg" columns="1"
+						required></textarea>
+					</md-input-container>
+					<md-button class="md-primary" type="submit" ng-click="showSimpleToast()"
+					ng-class="{'md-raised md-hue-1':
+					(contactForm.$dirty && contactForm.$valid)}">Αποστολη</md-button>
+				</form>
+			</md-content>
+		</div>
+	
+</section>

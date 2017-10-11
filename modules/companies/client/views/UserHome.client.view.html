@@ -1,0 +1,73 @@
+<section ng-controller="CompaniesController" ng-init="find1()" flex layout="row" layout-align="center center">
+  
+  
+  <section  style="opacity:0.9;" flex-sm="100"  flex-gt-sm="90" flex-gt-md="60" flex-gt-lg="50" >
+  
+     <md-list style="margin:5em;" >
+       
+	  <md-subheader  ng-hide="companies.length===0" class="md-no-sticky">Πρατήρια που βρίσκεστε στην εμβέλεια τους</md-subheader>
+		<md-subheader ng-show="companies.length===0" class="md-no-sticky">Δυστηχώς δεν υπάρχουν πρατήρια που να σας εξυπηρετούν στην εναλλακτική σας διεύθυνση</md-subheader>
+
+      <md-list layout-padding>
+        <md-list-item layout-align="center center" class="md-whiteframe-17dp md-2-line" style="background-color:white;opacity:0.9;padding:1em;" ng-repeat="company in companies" >
+            <i class="fa fa-truck fa-5x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+			
+            <div class="md-list-item-text">
+				<div layout="column">
+				<h3 >Όνομα Πρατηρίου:&nbsp; {{company.companyname}}</h3> 
+				<h3 >Τιμή/λίτρο:&nbsp;{{company.pricepL}}€</h3>
+				<h3 >Διεύθυνση:&nbsp; {{company.address}}</h3> 
+				<h3 >Τηλέφωνο:&nbsp; {{company.phonenumber}}</h3>
+					
+				</div>
+				<md-divider ></md-divider>
+				
+					<button  style="margin-bottom:1em;" class="btn  btn-info text-center" ui-sref="companies.order({compan:company._id,companyId: company.companyname,companyprice:company.pricepL,companythermansi:company.priceTh})" >
+					
+												   Eπόμενο βήμα
+												  
+												</button>
+				  
+						
+            </div>
+        </md-list-item>
+      </md-list>
+    </section>
+
+   
+  
+  <!--
+  <div class="row">
+	 <span class="col-sm-3 col-md-3"></span>	<span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Oνομα Εταιρείας</span> <span  class="col-sm-1 col-md-1 text-center"  style="text-decoration:underline;">Τιμη</span><span  class="col-sm-4 col-md-4 text-center"  style="text-decoration:underline;">Διεύθυνση</span> </span><span   style="text-decoration:underline;" class="text-center col-sm-2 col-md-2">Τηλέφωνο</span>
+ </div>
+ <hr>
+ </div>
+   <div class="row">
+	   <nav >
+	   
+		   <ul class="nav nav-pills nav-stacked">
+				
+				
+				<li  ng-repeat="company in companies">
+				<span id="viewcompany" style="height:3em;" class="list-group-item text-center" >
+					<span class="col-sm-1 col-md-1"></span>
+					<span class="col-sm-1 col-md-1">
+								<button style="position:relative;bottom:0.5em;" class="btn  btn-info" ui-sref="companies.order({compan:company._id,companyId: company.companyname,companyprice:company.pricepL,companythermansi:company.priceTh})" >
+	
+								   Παραγγείλτε τώρα
+								  
+								</button>
+						</span>
+ 						<span class="col-sm-1 col-md-1"></span>
+						<span  class="col-sm-2 col-md-2"  ng-bind="company.companyname" ></span> <span  class="col-sm-1 col-md-1" ng-bind="company.pricepL" ></span><span  class="col-sm-4 col-md-4"  ng-bind="company.address"></span> <span style="padding-left:3em;" ng-bind="company.phonenumber"  class="col-sm-2 col-md-2"></span>
+						
+				</span>
+				</li>
+			</u>
+		</nav>
+		
+  </div>
+  -->
+  
+  
+</section>

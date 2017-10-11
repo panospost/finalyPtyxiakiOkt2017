@@ -1,0 +1,125 @@
+<section  ng-controller="SignUpController" ng-init="getLocation()" flex layout="row" layout-align="center center">
+	
+<div style="margin-top:1em;opacity:0.9;" flex-sm="100"  flex-gt-sm="90" flex-gt-md="50" flex-gt-lg="40" class="md-whiteframe-17dp">
+   <md-toolbar >
+  <div style="background-color:#03A9F4;" class="md-toolbar-tools">
+            <h2><span >Εγγραφείτε στην εφαρμογή</span></h2>
+          </div>
+        </md-toolbar>
+  <md-content class="md-padding" >
+    
+      <form name="userForm" novalidate>
+
+    
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Όνομα</label>
+            <input ng-model="preUser.firstName" required>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Επίθετο</label>
+            <input ng-model="preUser.lastName" required>
+          </md-input-container>
+        </div>
+		
+	  <span layout-gt-sm="row">
+			<md-input-container ng-hide="true" class="md-block" flex-gt-sm>
+            <label>ΤΚ:</label>
+            <input name="postalCode" ng-model="User.postalCode" placeholder="12345"
+                   required  md-maxlength="6">
+
+            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">Ο ΤΚ Απαιτείται.</div>
+              <div ng-message="pattern" class="my-message">Δεν είναι έγκυρος ΤΚ
+              </div>
+              <div ng-message="md-maxlength" class="my-message">
+                Ο ΤΚ είναι 5 χαρακτήρες όχι παραπάνω!
+              </div>
+            </div>
+          </md-input-container>
+		  <md-input-container class="md-block" flex-gt-sm>
+				<label>Email</label>
+				<input ng-model="preUser.email" type="email" required>
+			  </md-input-container>
+		  <md-input-container class="md-block" flex-gt-sm>
+			<label>Αριθμός Δεή</label>
+			<input required ng-model="preUser.dehnumber"  ng-pattern="/^[0-9]{12}$/" md-maxlength="12">
+		</md-input-container>
+		  </span>
+	  
+	  
+       	<div layout-gt-sm="row" style="margin-bottom:0px;">
+     
+
+      
+	  <md-input-container class="md-block" flex-gt-sm>
+        <label>Σταθερό Tηλέφωνο</label>
+        <input required ng-model="preUser.phonenumber"  ng-pattern="/^[0-9]{10}$/" md-maxlength="10">
+      </md-input-container>
+	  <md-input-container class="md-block" flex-gt-sm>
+        <label>Κινητό Tηλέφωνο</label>
+        <input required ng-model="preUser.mobile"  ng-pattern="/^[0-9]{10}$/" md-maxlength="10">
+      </md-input-container>
+	  
+    </div>
+        
+
+        <span layout-gt-sm="row" ng-hide="true">	
+			<md-input-container class="md-block" flex-gt-sm>
+          <label>Διεύθυνση</label>
+          <input required ng-model="User.address">
+        </md-input-container>
+		<md-input-container class="md-block" flex-gt-sm>
+          <label>Aριθμός δρόμου</label>
+          <input required ng-model="User.streetnumber">
+        </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Πόλη</label>
+            <input required ng-model="preUser.city">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Περιοχή</label>
+            <input required ng-model="preUser.area">
+          </md-input-container>
+
+          
+        </span>
+		<span layout="row">
+		<md-button class="md-raised md-accent" ng-click="showMap($event)" >Ελεγχος/Διορθωση Τοποθεσιας</md-button>
+		 <p style="margin-top:1em;" ng-bind="preUser.street"></p>
+		</span>
+		
+		  <div layout-gt-sm="row" style="margin-bottom:0px;padding-bottom:0px;">
+				<md-input-container class="md-block" flex-gt-sm>
+				  <label style="text-align:center">Όνομα χρήστη</label>
+				  <input ng-model="preUser.username" type="username" required>
+			  </md-input-container>
+				<md-input-container class="md-block" flex-gt-sm>
+				  <label style="text-align:center">Your password</label>
+				  <input ng-model="preUser.password" type="password" required>
+			  </md-input-container>
+			 <md-input-container class="md-block" >
+				<label>Εγγραφή ως:</label>
+				<md-select ng-model="preUser.roles" required>
+				  <md-option value="pratiriouxos">
+					Πρατηριούχος
+				  </md-option>
+				  <md-option value="user">
+					Πελάτης
+				  </md-option>
+				</md-select>
+          </md-input-container>
+		  </div>
+		  <div layout-gt-sm="row" style="margin-bottom:0px;padding-bottom:0px;">
+		  <md-button style="margin-top:0;" class="md-primary" type="submit" ng-click="signup()"
+					ng-class="{'md-raised md-hue-1':
+					(userForm.$dirty && userForm.$valid)}">Εγγραφη</md-button>
+			</div>
+      </form>
+   
+  </md-content>
+  </div>
+</section>

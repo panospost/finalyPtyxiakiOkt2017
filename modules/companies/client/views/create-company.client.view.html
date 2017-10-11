@@ -1,0 +1,207 @@
+<section ng-controller="CompaniesController" flex layout="row" layout-align="center center">
+	
+	<div style="margin:5em;opacity:0.9;" flex-sm="100"  flex-gt-sm="90" flex-gt-md="50" flex-gt-lg="40" class="md-whiteframe-17dp">
+		 <md-toolbar>
+  <div style="background-color:#03A9F4;" class="md-toolbar-tools">
+            <h2><span >Καταχωρήστε το πρατήριο σας</span></h2>
+          </div>
+        </md-toolbar>
+		<md-content class="md-padding" >
+		
+		<form name="companyForm" class="form-horizontal" ng-submit="create(companyForm.$valid)" novalidate>
+				<div layout-gt-sm="row">
+				  <md-input-container class="md-block" flex-gt-sm>
+					<label>Ονομα Πρατηριου:</label>
+					<input type="text" id="companyname" name="companyname" class="form-control" ng-model="companyname" ng-minlength="5" class="form-control "  required/>
+				   </md-input-container>
+
+				  <md-input-container class="md-block" flex-gt-sm>
+					<label>Tηλέφωνο Επικοινωνίας:</label>
+					<input   ng-model="phonenumber"  ng-pattern="/^[0-9]{10}$/"   name="phonenumber"    md-maxlength="10" required/>
+				  </md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container class="md-block" flex-gt-sm>
+						<label>Xωρητικότητα 1ου φορτηγού σε λίτρα:</label>
+						<input type="number"  ng-model="truck1"     name="truck1"     required/>
+					  </md-input-container>
+					  <md-input-container class="md-block" flex-gt-sm>
+						<label>Xωρητικότητα 2ου φορτηγού σε λίτρα:</label>
+						<input   type="number" ng-model="truck2"     name="truck2"     required/>
+					  </md-input-container>
+				 </div>
+				 <div layout="row">
+					  <md-input-container class="md-block" flex-gt-sm>
+						<label>Tιμή Πετρελαίου Κίνησης:</label>
+						<input  type="number" ng-model="pricepL" name="pricepL"    required/>
+						<div ng-messages="companyForm.pricepL.$error" role="alert">
+							<p class="help-block error-text" ng-message="required">Απαιτείται τιμή/λιτρο!!!</p>
+					   
+						</div>
+					 </md-input-container>
+					  <md-input-container class="md-block" flex-gt-sm>
+						<label>Τιμή Πετρελαίου Θέρμανσης:</label>
+						<input  type="number" ng-model="priceTh" name="priceTh"      required />
+						<div ng-messages="companyForm.priceTh.$error" role="alert">
+							<p class="help-block error-text" ng-message="required">Απαιτείται τιμή/λιτρο!!!</p>
+					   
+						</div>
+					 </md-input-container>
+				 </div>
+				 <div layout="row">
+					 <md-button class="md-raised md-accent" ng-click="showMap($event)" >Εισαγωγη Τοποθεσιας</md-button>
+					 <p style="margin-top:1em;" ng-bind="address"></p>
+				 
+				 </div>
+			<md-button ng-hide="hideYpoboli" class="md-primary" type="submit" 
+					ng-class="{'md-raised md-hue-1':
+					(companyForm.$dirty && companyForm.$valid)}">Υποβολη Πρατηριου</md-button>
+			
+		</form>
+		</md-content>
+		
+	</div>
+<!--
+  <div style="margin-bottom:3em;color:gray"class="text-center">
+    <h1>Δημιουργήστε το πρατήριο σας</h1>
+  </div>
+  <div class="container row">
+    <form name="companyForm" class="form-horizontal" ng-submit="create(companyForm.$valid)" novalidate>
+      <span class="row">
+	  <span  class="col-md-1"></span>
+        <fieldset class="col-md-3">
+			<div class="form-group" show-errors >
+				
+					<label for="companyname"  >Ονομα Πρατηριου:</label>
+					
+					
+					<input type="text" id="companyname" name="companyname" class="form-control" ng-model="companyname" ng-minlength="5" placeholder="Ονομα Πρατηριου"class="form-control "  required/>
+				 <div ng-messages="companyForm.companyname.$error" role="alert">
+				   <p class="help-block error-text" ng-message="required">Το ονομα του Πρατηριου απαιτείται</p>
+			  </div>
+				
+			</div>
+			<div class="form-group phonenumber"  show-errors>
+				
+					<label for="phonenumber" >Τηλέφωνο πρατηριου:</label>
+					<input type="number"  ng-model="phonenumber"   class="form-control" min="1111111111" max="9999999999" name="phonenumber"   ng-minlength="7" ng-maxlength=" 10 "/>				
+				 <div ng-messages="companyForm.phonenumber.$error" role="alert">
+				   <p class="help-block error-text" ng-message="minlength">Τα ψηφια του τηλεφώνου ειναι λίγα</p>
+				   <p class="help-block error-text" ng-message="maxlength">Τα ψηφια του τηλεφώνου ειναι πολλά</p>
+			  </div>
+			</div>
+			<div class="form-group" show-errors>
+				
+					<label for="truck1" >Μέγεθος 1ου φορτηγού(προτεραιότητα):</label>
+					<input type="number"  ng-model="truck1"   class="form-control" name="truck1" min="1000" ng-minlength="4 " ng-maxlength=" 7 "/>				
+				 <div ng-messages="companyForm.truck1.$error" role="alert">
+				   <p class="help-block error-text" ng-message="minlength">Τα λιτρα του φορτηγου ειναι λίγα</p>
+				   <p class="help-block error-text" ng-message="maxlength">Τα λίτρα του φορτηγού ειναι πολλά</p>
+			  </div>
+			</div>
+			
+			<div class="form-group" show-errors>
+				
+					<label for="truck2" >Μέγεθος 2ου φορτηγού:</label>
+					<input type="number"  ng-model="truck2"   class="form-control" min="1000" name="truck2"  ng-minlength="4 " ng-maxlength=" 7 "/>				
+				 <div ng-messages="companyForm.truck2.$error" role="alert">
+				   <p class="help-block error-text" ng-message="minlength">Τα λιτρα του φορτηγου ειναι λίγα</p>
+				   <p class="help-block error-text" ng-message="maxlength">Τα λίτρα του φορτηγού ειναι πολλά</p>
+			  </div>
+			</div>
+			<div class="form-group" show-errors>
+				<div>
+					<label for="pricepL" >Τιμή λίτρου Πετρελαίου Κίνησης:</label>
+					
+					<input type="number" ng-model="pricepL" name="pricepL"  min="0.1" max="10" class="form-control " required />
+				<div ng-messages="companyForm.pricepL.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">Απαιτείται τιμή/λιτρο!!!</p>
+				   
+			  </div>
+				</div>
+			</div>
+			
+		</fieldset>
+		<span  class="col-md-1"></span>
+		<fieldset class="col-md-3">
+		
+			<div class="form-group" show-errors>
+				<div>
+					<label for="pricepL" >Τιμή λίτρου Πετρελαίου Θέρμανσης:</label>
+					
+					<input type="number" ng-model="priceTh" name="priceTh"  min="0.1" max="10" class="form-control " required />
+				<div ng-messages="companyForm.priceTh.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">Απαιτείται τιμή/λιτρο!!!</p>
+				   
+			  </div>
+				</div>
+			</div>
+			
+			
+			<div class="form-group " >
+					  <label for="area"> Νομός:</label>
+					  <div>
+						<select   name="area" class="form-control" placeholder="Διάλεξε Νομό" ng-model="area" ng-options="choice for choice in areasCC" >
+									<option value="" disabled selected>Διαλέξτε Noμό</option>			
+							</select>
+							</div>
+							<div ng-messages="companyForm.area.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">area is required.</p>
+					  </div>
+			 </div>
+					<div class="form-group" show-errors>
+					  <label for="city">Πόλη:</label>
+					  <input type="text"  id="city" name="city" class="form-control" ng-model="city" placeholder="Πχ Θεσσαλονίκη"  required>
+					  <div ng-messages="companyForm.city.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">city is required.</p>
+					  </div>
+					</div>
+			<div class="form-group" show-errors>
+				
+					
+					<div class="field" ng-model="address" id="searchboxWrapper"><label>Διεύθυνση Πρατηρίου:</label></div>
+				<div ng-messages="companyForm.address.$error" role="alert">
+				   <p class="help-block error-text" ng-message="minlength">Απαιτείται Σωστή διεύθυνση</p>
+				   <p class="help-block error-text" ng-message="required">Απαιτείται Σωστή διεύθυνση</p>
+				   <script type="text/ng-template" id="searchbox.tpl.html">
+			   <input type="text" class="form-control" placeholder="Γράψτε την ακριβής διεύθυνση της εταιρείας σας.." name="address"  ng-minlength="5" required />
+			</script>
+			  </div>
+			</div>
+			<div class="form-group">
+          
+		   <button type="submit" style="margin-top:1em;" class="btn btn-info"><i class="fa fa-paper-plane"></i>&nbsp;Υποβολή Πρατηρίου</button>
+        </div>
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+		</fieldset>
+		<span  class="col-md-1"></span>
+				<div id="map-canvas"  class="col-md-3">
+			<small>*Μπορείτε να κουνήσετε τον δείκτη αν θέλετε μεγαλύτερη ακρίβεια στην θέση του πρατηρίου</small>
+			<ui-gmap-google-map
+					
+					center='map.center'
+					zoom='map.zoom'
+					draggable="map.draggable"
+					options="options">
+				<ui-gmap-marker
+						coords="marker.coords"
+						options="marker.options"
+						 events="marker.events"
+						idkey="marker.id">
+				</ui-gmap-marker>
+				 <ui-gmap-search-box template="searchbox.template" parentdiv="'searchboxWrapper'" events="searchbox.events" ></ui-gmap-search-box>
+			</ui-gmap-google-map>
+		 
+			</div>
+      </span>
+        
+       <span  class="col-md-1"></span>
+	  
+    </form>
+	
+
+  </div>
+  -->
+</section>

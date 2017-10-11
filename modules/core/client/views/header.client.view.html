@@ -1,0 +1,123 @@
+ <section ng-controller="HomeController"  >
+ 
+	
+	<div  style="background-color:#03A9F4;" layout="row" layout-padding class="md-hue-3" layout-align="space-between center">
+<div>
+    <md-button ui-sref="home" ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'admin'">Αρχικη</md-button>
+	<md-button ui-sref="companies.list2" ng-show="authentication.user.roles == 'pratiriouxos'">Αρχικη</md-button>
+    <md-button ui-sref="home">Σχετικα με εμας</md-button>
+    <md-button ui-sref="home" >Apps</md-button>	
+    <md-menu>
+        <md-button ui-sref="#" md-menu-origin ng-click="$mdOpenMenu()">Βοηθεια<i class="fa fa-arrow-down" aria-hidden="true"></i></md-button>
+        <md-menu-content width="">
+            <md-menu-item>
+                <md-button ui-sref="home" >Οδηγίες</md-button>
+            </md-menu-item>
+			<md-menu-item>
+                <md-button ui-sref="newMessage">Επικοινωνία με admin</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ui-sref="home">About</md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>
+<div class="nav-buttons">
+	<md-menu ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" >
+        <md-button ui-sref="#" md-menu-origin ng-click="$mdOpenMenu()"><span ng-bind="authentication.user.username"></span><i class="fa fa-arrow-down" aria-hidden="true"></i></md-button>
+        <md-menu-content width="">
+			<md-menu-item ng-show="authentication.user.roles == 'pratiriouxos'">
+                <md-button ui-sref="companies.create" >Δημιουργία Πρατηρίου</md-button>
+            </md-menu-item>
+			<md-menu-item ng-hide="authentication.user.roles == 'user'||authentication.user.roles == 'admin'">
+                <md-button  ui-sref="companies.list2">Τα πρατήρια μου</md-button>
+            </md-menu-item>
+            <md-menu-item ng-show="authentication.user.roles == 'user'">
+                <md-button ui-sref="UserHome.homePage" >Κοντινά Πρατήρια</md-button>
+            </md-menu-item>
+			<md-menu-item ng-show="authentication.user.roles == 'user'">
+                <md-button ui-sref="orders.list" >Οι παραγγελίες μου</md-button>
+            </md-menu-item>
+			<md-menu-item>
+                <md-button ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" ui-sref="settings.profile" >My profile</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ui-sref="signout"  target="_self" ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" >Log Out</md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+	<md-button ng-click="showAdvanced($event)" aria-label="Favorite" ng-hide="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'">
+          ΣYνδεση
+        </md-button>
+    
+</div>
+	<!--
+	
+	<md-toolbar class="md-tall md-toolbar-tools" layout="row" layout-align="space-around center" >
+     
+		<h2>
+        
+         <img alt="E-πρατήριο" style="margin-left:2em;display:inline;width:8em;height:8em;"  src="modules/core/client/img/brand/logo.png" />
+       
+		
+		
+		E-πρατήριο</h2>
+		
+		<span flex></span>
+        <md-button ui-sref="home" aria-label="Αρχικη">
+			Αρχικη
+        </md-button>
+        
+        <md-button   ui-sref="p" target="_blank" aria-label="Learn More">
+          Πως δουλεύει
+        </md-button>
+        
+		<md-button  aria-label="Favorite">
+          Σχετικά με εμας
+        </md-button>
+		
+		<md-button  aria-label="Favorite">
+          Εφαρμογές Android
+        </md-button>
+		
+		<md-button ng-click="showAdvanced($event)" aria-label="Favorite">
+          Σύνδεση
+        </md-button>
+    </md-toolbar>
+		
+</span>
+
+<div  ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" >
+			
+		<md-toolbar class="md-tall md-toolbar-tools" layout="row" layout-align="space-around center" >
+     
+		<h2>
+        
+         <img alt="E-πρατήριο" style="margin-left:2em;display:inline;width:8em;height:8em;"  src="modules/core/client/img/brand/logo.png" />
+       
+		
+		
+		E-πρατήριο</h2>
+		
+		<span flex></span>
+        <md-button ui-sref="home" aria-label="Αρχικη">
+			Αρχικη
+        </md-button>
+        
+        <md-button  ui-sref="settings.profile" aria-label="Learn More">
+          Επεξεργασία προφίλ
+        </md-button>
+        
+		<md-button href="/api/auth/signout" target="_self" aria-label="Favorite">
+          Eξοδος
+        </md-button>
+		
+		
+		
+		
+    </md-toolbar>
+		
+</span>
+		 
+		</div>-->
+	</section>

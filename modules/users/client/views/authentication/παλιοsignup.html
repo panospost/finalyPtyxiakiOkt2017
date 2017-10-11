@@ -1,0 +1,181 @@
+<div ng-controller="AuthenticationController" ng-init="open()">
+ 
+  <div>
+    <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
+		
+	
+	
+      <fieldset class="container row ">
+	  <div class="page-header">
+		 <h1>Eγγραφείτε στην Υπηρεσία μας</h1>
+		</div>
+	  <span class="col-md-3">
+		
+				<div class="form-group" show-errors>
+				  <label for="firstName">Όνομα:</label>
+				  <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name" required>
+				  <div ng-messages="userForm.firstName.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">First name is required.</p>
+				  </div>
+				</div>
+				
+				<div class="form-group" show-errors>
+				  <label for="lastName">Επίθετο:</label>
+				  <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>
+				  <div ng-messages="userForm.lastName.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">Last name is required.</p>
+				  </div>
+				</div>
+				<div class="form-group" show-errors>
+				  <label for="email">Email:</label>
+				  <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase required>
+				  <div ng-messages="userForm.email.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">Email address is required.</p>
+					<p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+				  </div>
+				</div>
+				<div class="form-group" show-errors>
+				  <label for="phonenumber">Σταθερό Tηλεφωνο:</label>
+				  <input type="number" id="phonenumber" name="phonenumber" class="form-control" ng-model="credentials.phonenumber" min="0" placeholder="2310..."  required>
+				  <div ng-messages="userForm.phonenumber.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">phonenumber  is required.</p>
+				   
+				  </div>
+				</div>
+				<div class="form-group" show-errors>
+				  <label for="mobile">*Κινητό Tηλεφωνο:</label>
+				  <input type="number" id="mobile" name="mobile" class="form-control" min="6900000000" max="6999999999"ng-model="credentials.mobile" placeholder="69..."required>
+				  <div ng-messages="userForm.mobile.$error" role="alert">
+					
+				   
+				  </div>
+				</div>
+				<div  class="form-group col-md-4" show-errors>
+			  <label for="dehnumber" class=" control-label">Αριθμός ΔΕΗ:</label>
+			   <input  style="width:150px;" type="number" name="dehnumber" ng-model="dehnumber"  min="0" id="dehnumber" class="form-control" placeholder="Aριθμός λογαριασμού δεη" required/>
+		   </div>
+		</span>
+		<span class="col-md-3">
+				
+			 
+				
+				
+				<div class="form-group " >
+				  <label for="area"> Νομός:</label>
+				  <div>
+					<select  style="width:250px;" name="area" class="form-control" placeholder="Διάλεξε Νομό" ng-model="credentials.area" ng-options="choice for choice in areas" >
+								<option value="" disabled selected>Διαλέξτε Noμό</option>			
+						</select>
+						</div>
+						<div ng-messages="userForm.area.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">area is required.</p>
+				  </div>
+			   </div>
+				<div class="form-group" show-errors>
+				  <label for="city">Πόλη:</label>
+				  <input type="text" id="city" name="city" class="form-control" ng-model="credentials.city" placeholder="Πχ Θεσσαλονίκη"  required>
+				  <div ng-messages="userForm.city.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">city is required.</p>
+				  </div>
+				</div>
+				
+				<div class="form-group" show-errors>
+				
+					
+					<div class="field" ng-model="credentials.street" id="searchboxWrapper"><label>Η Διεύθυνση σας:</label></div>
+				<div ng-messages="companyForm.address.$error" role="alert">
+				   <p class="help-block error-text" ng-message="minlength">Απαιτείται Σωστή διεύθυνση</p>
+				   <p class="help-block error-text" ng-message="required">Απαιτείται Σωστή διεύθυνση</p>
+				   
+			  </div>
+			</div>
+				  
+				<div class="form-group" show-errors>
+				  <label for="username">Όνομα Χρήστη(id):</label>
+				  <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" lowercase required>
+				  <div ng-messages="userForm.username.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">Username is required.</p>
+				  </div>
+				</div>
+				<div class="form-group" show-errors>
+				  <label for="password">Κωδικός:</label>
+				  <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" required ng-minlength="6">
+				  <div ng-messages="userForm.password.$error" role="alert">
+					<p class="help-block error-text" ng-message="required">Password is required.</p>
+					<p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+				  </div>
+				</div>
+				<div class="form-group" show-errors>
+				  <label for="epassword">Eπαλήθευση Κωδικού:</label>
+				  <input type="password"  id="epassword" name="epassword" compare-to="credentials.password" class="form-control" ng-model="epassword" placeholder="Δώστε ξανα τον ίδιο κωδικό" required ng-minlength="6">
+				  <div ng-messages="userForm.epassword.$error" role="alert">
+					<p ng-show="match" class="help-block error-text" ng-message="required">Οι κωδικοί δεν ταιριάζουν.</p>
+					<div  ng-message="compareTo">Οι κωδικοί δεν ταιριάζουν</div>
+				  </div>
+				</div>
+				
+				<div  vc-recaptcha
+    key="'6LcsMxsTAAAAAJE7tx9zwdJ1UIkDFMfzRTBqycJB'"></div>
+				
+				<div class="text-center form-group">
+					
+				   <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i>&nbsp;Εγγραφή</button>
+				  &nbsp; or&nbsp;
+				  <a ui-sref="authentication.signin" class="show-signup">Είστε ήδη εγγεγραμένος;Click εδώ</a>
+				</div>
+				<div ng-show="error" class="text-center text-danger">
+				  <strong ng-bind="error"></strong>
+				</div>
+		</span>
+		
+			
+		<div id="map-canvas1"  >
+
+				<ui-gmap-google-map
+						
+						center='map1.center'
+						zoom='map1.zoom'
+						draggable="map1.draggable"
+						options="options1">
+					<ui-gmap-marker
+							coords="marker1.coords"
+							options="marker1.options"
+							 events="marker1.events"
+							idkey="10">
+					</ui-gmap-marker>
+					<ui-gmap-search-box template="searchbox.template" parentdiv="'searchboxWrapper'" events="searchbox.events" position="BOTTOM_RIGHT"></ui-gmap-search-box>
+				</ui-gmap-google-map>
+			<script type="text/ng-template" id="searchbox.tpl.html">
+			   <input type="text" class="form-control" placeholder="Γράψτε την ακριβής διεύθυνση του σπιτιού σας.." name="credentials.street"  ng-minlength="5" required />
+			</script>	
+				</div>
+				
+		<small>*Βεβαιωθείτε οτι ο δείκτης ειναι στην θέση του σπιτιού σας</small>
+		<small>Σε περίπτωση λάθους αφήστε εμας να βρούμε αυτόματα τις θέσεις σας.<button type="button" ng-click="getLocation()">Διόρθωση τοποθεσίας</button> </small>
+		<p><small>Aμα ακόμα υπάρχει πρόβλημα στείλτε email στο panospost1@gmail.com </small></p>
+        
+		
+	
+  </div>
+    </fieldset>
+    </form>
+	<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Eπιλέξτε τι χρήστης είστε:</h3>
+        </div>
+        <div class="modal-body ">
+		<p>Αν επιθυμείτε να είστε πελάτης, και να θέλετε να παραγγείλετε πετρέλαιο κίνησης η θέρμανσης επιλέξτε το κουμπί ΠΕΛΑΤΗΣ </p>
+		<div class="text-center form-group">
+		<button class="btn btn-primary text-center" ng-click="set1()">ΠΕΛΑΤΗΣ</button>
+		</div>
+		<p>Αν είστε πρατηριούχος και θέλετε να εγγράψατε το πρατήριο σας στην υπηρεσία μας για διευκόλυνση στην διεκπαιρέωση των παραγγελιών επιλέξτε το κουμπί ΠΡΑΤΗΡΙΟΥΧΟΣ</p>
+		 <div class="text-center form-group">
+		 <button class="btn-success btn" ng-click="set()">ΠΡΑΤΗΡΙΟΥΧΟΣ</button>
+		 </div>
+        <div class="text-center modal-footer form-group">
+            <div class="text-center form-group">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Επιστροφη στην Αρχικη</button>
+			 </div>
+        </div>
+    </script>
+</div>

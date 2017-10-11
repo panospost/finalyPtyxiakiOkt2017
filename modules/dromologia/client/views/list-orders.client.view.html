@@ -1,0 +1,22 @@
+<section ng-controller="OrdersController" ng-init="find()">
+  <div class="page-header">
+    <h1>Οι παραγγελίες σας</h1>
+  </div>
+  
+  <div class="list-group">
+    <a ng-repeat="order in orders" ui-sref="orders.view({orderId: order._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Η παραγγελία εγινε:
+        <span ng-bind="order.created | date:'mediumDate'"></span>
+        Ο πελάτης ειναι ο:
+        <span ng-bind="order.user.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="order.title"></h4>
+      <p class="list-group-item-text" ng-bind="order.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="order.$resolved && !order.length">
+    No articles yet, why don't you <a ui-sref="order.create">create one</a>?
+  </div>
+  
+</section>

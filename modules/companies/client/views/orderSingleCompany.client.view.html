@@ -1,0 +1,171 @@
+<section ng-controller="OrdersController" ng-init="findsingleCompany()" flex layout="row" layout-align="center center">
+
+
+<section style="margin:5em;" flex-sm="100"  flex-gt-sm="90" flex-gt-md="50" flex-gt-lg="50" class="md-whiteframe-17dp">
+
+	<md-content class="md-padding" >
+		<form name="orderForm"   novalidate>
+			<div layout-gt-sm="row"  md-theme="docs-dark">
+			 
+			   Όνομα Πρατηρείου<h3 ng-bind="company"></h3>
+			  
+          </div>
+		  <div layout="row">
+		<md-input-container class="md-block" flex-gt-sm flex="50">
+            <label>Eίδος Παραγγελίας</label>
+            <md-select ng-model="typeOfOrder" required>
+              <md-option ng-repeat="choice in tporder" value="{{choice}}">
+                {{choice}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+		  <md-input-container class="md-block" flex-gt-sm flex="50">
+            <label>Τρόπος Πληρωμής</label>
+            <md-select ng-model="payment" required>
+              <md-option ng-repeat="choice in waypayment" value="{{choice}}">
+                {{choice}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+		</div>
+		<md-input-container class="md-block" flex-gt-sm>
+					<label>Ποσότητα λίτρων</label>
+				   <input required  type="number" step="any" name="quantity" ng-model="quantity" min="50"
+					   max="500"  ng-click="calc1()" required/>
+				  </md-input-container>
+		<div layout-gt-sm="row" > 
+				
+				
+				
+				 <md-input-container class="md-block" flex-gt-sm>
+					<label>Ώρα διανομής</label>
+					<md-select ng-model="hour" required>
+					  <md-option ng-repeat="choice in hours" value="{{choice}}">
+						{{choice}}
+					  </md-option>
+					</md-select>
+				  </md-input-container>
+				
+				<md-input-container>
+				<label>Eπιθυμητή Ημερομηνία</label>
+				 <md-datepicker name="duedate" ng-model="duedate" min-date="afterTomorrow" ng-click="dd()" 
+					md-date-filter="disabled" md-min-date="minDate">
+				</md-datepicker>
+				</md-input-container>
+				
+			 
+		</div>		
+			<md-input-container class="md-block">
+			  <label>Μυνημα</label>
+			  <input name="message" ng-model="message" id="message" md-maxlength="150"  md-select-on-focus></input>
+			</md-input-container>	
+         
+
+		<md-input-container class="md-block" flex-gt-sm>
+            <label>Συνολικό κόστος παραγγελίας</label>
+           <input style="width:10em;" type="number" name="pricetp"  ng-model="pricetp"  value="{{quantity*company.pricepL}}"  disabled />
+          </md-input-container>
+
+	
+		 <md-button class="md-primary text-center" type="submit" ng-click="create(orderForm.$valid)"
+					ng-class="{'md-raised md-hue-1':
+			(orderForm.$dirty && orderForm.$valid)}">Υποβολη Παραγγελιας</md-button>
+		
+		<div ng-show="error" class="text-danger">
+			<strong ng-bind="error"></strong>
+		</div>
+
+		</form>
+ </md-content>
+</section>
+<!--
+<div class="row">
+<form name="orderForm" class="form-horizontal " ng-submit="create(orderForm.$valid)" novalidate>
+<span class="col-md-1"></span>
+<fieldset class="stoixeiaOrder col-md-3" >
+<legend>Στοιχεία Παραγγελίας:</legend>
+<div class="form-group" >
+<label for="company" class="control-label">Όνομα Πρατήρειου:</label>
+<div>
+<input style="width:250px;" name="company"  class="form-control" ng-model="company"    disabled />
+</div>
+</div>
+<div  class="form-group" show-errors>
+<label for="typeOfOrder" class=" control-label">Eίδος Παραγγελίας</label>
+<select style="width:250px;" name="typeOfOrder" class="form-control" ng-model="typeOfOrder" ng-options="choice for choice in tporder " required>
+<option value="" disabled selected>Διαλέξτε Τυπο Παραγγελίας</option>
+</select>
+</div>
+<div  class="form-group " show-errors>
+<label for="payment" class=" control-label">Τρόπος Πληρωμής</label>
+<select style="width:250px;" name="payment" class="form-control"  ng-model="payment" ng-options="choice for choice in waypayment " >
+<option value="" disabled selected>Διαλέξτε Τρόπο Πληρωμής</option>
+</select>
+</div>
+<div  class="form-group" show-errors>
+<label for="quantity" class=" control-label"> Ποσότητα λίτρων:</label>
+<input style="width:250px;" type="number" ng-click="calc1()" name="quantity" ng-model="quantity" min="50" max="500" id="quantity" class="form-control"  placeholder="Ποσότητα" required/>
+<div ng-messages="orderForm.quantity.$error" role="alert">
+<p class="help-block error-text" ng-message="required">quantity is required.</p>
+</div>
+</div>
+</fieldset>
+<fieldset class="date&time col-md-3">
+<legend>'Ωρα/Ημερομηνία παραγγελίας:</legend>
+<div  class="form-group" show-errors>
+<label for="hour" class="control-label">Ώρα διανομής</label>
+<select style="width:250px;" name="hour"  ng-model="hour" class="form-control" ng-options="choice for choice in hours track by choice " required>
+<option value="" disabled selected>Διαλέξτε Ώρα διανομής</option>
+</select>
+<div ng-messages="orderForm.hour.$error" role="alert">
+<p class="help-block error-text" ng-message="required">hour is required.</p>
+</div>
+</div>
+<div class="form-group" show-errors>
+<label for="duedate" class=" control-label">Ημερομηνία παράδοσης:</label>
+<uib-datepicker  name="duedate" ng-model="duedate" min-date="afterTomorrow" ng-click="dd()" datepicker-options="dateOptions"></uib-datepicker>
+<div ng-messages="orderForm.duedate.$error" role="alert">
+<p class="help-block error-text" ng-message="required">duedate is required.</p></div></div>
+<div  class="form-group text-center" show-errors>
+<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;Υποβολή Παραγγελίας</button></div>
+<div ng-show="error" class="text-danger">
+<strong ng-bind="error"></strong>
+</div>
+<small>Επιθυμείτε να παραγγείλετε από άλλη τοποθεσία</small>
+<md-checkbox ng-model="show" ng-click="showMap()" aria-label="Checkbox 2">
+Δήλωση τοποθεσίας
+</md-checkbox>
+<div id="map-canvas1 " ng-show="show" >
+<div class="field" style="width:250px;" name="street" ng-model="preUser.street" id="searchboxWrapper"><label>Η Διεύθυνση σας:</label></div>
+<button ng-click="getLocation()">Eναλλακτική τοποθεσία</button>
+<ui-gmap-google-map
+control="map1.control"
+center='map1.center'
+zoom='map1.zoom'
+draggable="map1.draggable"
+options="options1">
+<ui-gmap-marker
+coords="marker1.coords"
+options="marker1.options"
+events="marker1.events"
+idkey="10">
+</ui-gmap-marker>
+</ui-gmap-google-map>
+</div>
+</fieldset>
+<fieldset class="messageprice col-md-3">
+<legend>Κοστος/Μυνημα στον προμηθευτη:</legend>
+<div style="left:14px;" class="form-group" show-errors>
+<label for="pricetp">Συνολικό κόστος:</label>
+<input style="width:250px;" type="number" name="pricetp" ng-model="pricetp" id="pricetp" class="form-control" value="{{quantity*company.pricepL}}"placeholder="Λεφτα προς πληρωμη" disabled/>
+</div>
+<div  class="form-group" show-errors>
+<label for="message" class=" control-label">Μυνημα:</label>
+<textarea rows="4" style="resize: none;" cols="50" name="message" ng-model="message" id="message" class="form-control"  placeholder="Κατι σχετικό με την Παραγγελία σας(Προαιρετικο)"></textarea>
+</div>
+</fieldset>
+<span class="col-md-1"></span>
+</form>
+</div>
+-->
+</section>

@@ -1,0 +1,59 @@
+<section ng-controller="CompaniesController" ng-init="find1()">
+  <div class="page-header">
+    <h1>Τα πρατήρια της περιοχής σας111</h1>
+  </div>
+   <div class="list-group">
+    <a id="viewcompany" style="" ng-repeat="company in companies" ui-sref="companies.order({companyId: company.companyname,companyprice:company.pricepL})" class="list-group-item">
+      
+      <h4 class="list-group-item-heading text-center" id="title" ng-bind="company.companyname"></h4>
+	  <hr>
+	  <div class="text-center " >
+      <h4 class="list-group-item-heading" ng-bind="company.area"></h4>
+	  <h4 class="list-group-item-heading" ng-bind="company.city"></h4>
+	  <h4 class="list-group-item-heading" ng-bind="company.address"></h4>
+	  </div>
+	  
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="companies1.$resolved && !companies.length">
+   Δυστηχώς δεν υπάρουν πρατήρια που να εξυπηρετούν την περιοχή σας ακομα εγγεγραμένα στο σύστημα!
+  </div>
+  
+  <ui-gmap-google-map
+                center='map1.center'
+                zoom='9'
+                draggable="map1.draggable"
+                options="options">
+				<ui-gmap-marker
+                    coords="marker1.coords"
+                    options="marker1.options"
+					
+                    idkey="marker1.id">
+            </ui-gmap-marker>
+			 
+			 <ui-gmap-marker ng-repeat="marker in markers" idKey="marker.id" coords="marker.coordinates" click="markerClick(marker)">
+      <ui-gmap-window show="marker.show" options="marker.options" 
+      closeClick="markerClose(marker)" 
+      templateUrl="map1.windowTemplate"
+      templateParameter="map1.windowParameter(marker)"
+      ng-cloak="ng-cloak">
+      </ui-gmap-window>
+    </ui-gmap-marker>
+		
+			
+			
+			
+			
+			  
+            
+        </ui-gmap-google-map>
+	 <script type="text/ng-template" id="window_template.html">
+       <div >Όνομα Εταιρειας:{{parameter.name}}
+				<p>Διεύθυνση:{{parameter.address}}</p>
+				<p>Τηλέφωνο:{{parameter.phonenumber}}</p>
+				<p>Tιμη/λιτρο:{{parameter.price}}</p>
+		</div>
+    </script>
+  
+  
+</section>

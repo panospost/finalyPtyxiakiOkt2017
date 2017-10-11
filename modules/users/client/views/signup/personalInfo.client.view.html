@@ -1,0 +1,53 @@
+<section ng-controller="PersonalInfoController">
+	<form name="personalInfo" ng-submit="next(personalInfo.$valid)" class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+				<div class="form-group" show-errors>
+						  <label for="firstName">Όνομα:</label>
+						  <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials1.firstName" placeholder="First Name" required>
+						  <div ng-messages="personalInfo.firstName.$error" role="alert">
+							<p class="help-block error-text" ng-message="required">First name is required.</p>
+						  </div>
+				</div>
+				<div class="form-group" show-errors>
+						  <label for="lastName">Επίθετο:</label>
+						  <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials1.lastName" placeholder="Last Name" required>
+						  <div ng-messages="personalInfo.lastName.$error" role="alert">
+							<p class="help-block error-text" ng-message="required">Last name is required.</p>
+						  </div>
+				</div>
+				<div class="form-group" show-errors>
+						  <label for="email">Email:</label>
+						  <input type="email" id="email" name="email" class="form-control" ng-model="credentials1.email" placeholder="Email" lowercase required>
+						  <div ng-messages="personalInfo.email.$error" role="alert">
+							<p class="help-block error-text" ng-message="required">Email address is required.</p>
+							<p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+						  </div>
+				</div>
+				<div class="form-group" show-errors>
+						  <label for="phonenumber">Σταθερό Tηλεφωνο:</label>
+						  <input type="number" id="phonenumber" name="phonenumber" class="form-control" ng-model="credentials1.phonenumber" min="0" placeholder="2310..."  required>
+						  <div ng-messages="personalInfo.phonenumber.$error" role="alert">
+							<p class="help-block error-text" ng-message="required">phonenumber  is required.</p>
+						   
+						  </div>
+				</div>
+				<div class="form-group" show-errors>
+						  <label for="mobile">*Κινητό Tηλεφωνο:</label>
+						  <input type="number" id="mobile" name="mobile" class="form-control" min="6900000000" max="6999999999"ng-model="credentials1.mobile" placeholder="69..."required>
+						  <div ng-messages="personalInfo.mobile.$error" role="alert">
+							
+						   
+						  </div>
+				</div>
+			   <div  class="form-group " show-errors>
+					  <label for="dehnumber" class=" control-label">Αριθμός ΔΕΗ:</label>
+					   <input   type="number" name="dehnumber" ng-model="credentials1.dehnumber"  min="0" id="dehnumber" class="form-control" placeholder="Aριθμός λογαριασμού δεη" required/>
+				</div>
+				 <div class="form-group">
+							<button  class="btn-success btn" >Eπόμενο βημα</button>
+							<button class="btn btn-warning btn" type="button" ng-click="back()">Προηγούμενο Βήμα</button>
+			    </div>
+					
+			   
+      
+		   </form>
+</section>

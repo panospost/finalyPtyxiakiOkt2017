@@ -1,0 +1,24 @@
+<section ng-controller="OrdersController" ng-init="findOne()">
+  <div class="page-header">
+    <h1 ng-bind="order.user.displayName"></h1>
+  </div>
+  <div class="pull-right" ng-show="authentication.user._id == order.user._id">
+    
+    <a class="btn btn-primary" ng-click="remove();">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  
+      Η παραγγελία έγινε:
+      <div class="lead" ng-bind="order.created | date:'mediumDate'"></div>
+      Το όνομα σας:
+      <div class="lead" ng-bind="order.user.displayName"></div>
+	  Το ποσό που δώσατε:
+	  <div  class="lead" ng-bind="order.pricetp"></div>
+	  H εταιρεία που παραγγείλατε:
+	  <div  class="lead" ng-bind="order.companyname"></div>
+	  Ημερομμηνία παραλαβής:
+	  <div  class="lead" ng-bind="order.duedate|date:'mediumDate'"></div>
+ 
+  
+</section>

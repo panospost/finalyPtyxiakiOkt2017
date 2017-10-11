@@ -1,0 +1,46 @@
+<div ng-controller="AuthenticationController">
+<div >
+  <h1 class="page-header text-center">Δώστε τα στοιχεία εισόδου σας</h1>
+		<div>
+    <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin md-inline-form" novalidate autocomplete="off">
+      
+        
+		 
+		<div  class="form-group" show-errors>
+            <label class=" control-label" for="username">Όνομα Χρήστη(id):</label>
+            <input name="username" class="form-control" ng-model="credentials.username">
+			<div ng-messages="userForm.username.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Το Username είναι απαραίτητο</p>
+          </div>
+        </div>
+		   
+			 
+		  
+		 <div  class="form-group" show-errors>
+            <label class=" control-label" for="password">Κωδικός:</label>
+            <input type="password" name="password" class="form-control" ng-model="credentials.password">
+			<div ng-messages="userForm.password.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Το Password είναι απαραίτητο.</p>
+          </div> 
+	  </div>
+        
+		   
+        
+        <div class="text-center form-group">
+		
+          <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i>&nbsp;Εισοδος</button>
+          &nbsp; or&nbsp;
+          <a ui-sref="authentication.signup">Kάντε εγγραφή</a>
+        </div>
+        <div class="text-center forgot-password">
+          <a ui-sref="password.forgot">Ξεχάσατε τον κωδικό σας;</a>
+        </div>
+        <alert type="danger" ng-show="error" class="text-center text-danger">
+          <span ng-bind="error"></span>
+        </alert>
+      
+    </form>
+  </div>
+  
+</div>
+</div>

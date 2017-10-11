@@ -1,0 +1,85 @@
+<section ng-controller="RoleController">
+<form name="finalForm" >
+	<div class="row">
+		<fieldset class="col-md-5">
+		 <legend>O ρόλος που διαλέξατε:</legend>
+			<span class="row">
+			 
+				
+				
+				<span class="col-md-7">
+					<label>Ρόλος:</label><p ng-bind="$storage.localuser.roles"></p>
+					
+				</span>
+				
+			</span>
+		</fieldset>
+
+
+
+		<fieldset class="col-md-7">
+		 <legend>Τα προσωπικα σας στοιχεία:</legend>
+		
+			<span class="row">
+				<span class="col-md-6">
+					 <label>Όνομα:</label>
+					<p  ng-bind="$storage.localuser.firstName"></p>
+					<label>Επίθετο:</label>
+					<p  ng-bind="$storage.localuser.lastName"></p>
+					<label>Σταθερό τηλ:</label>
+					<p  ng-bind="$storage.localuser.phonenumber"></p>
+				</span>
+				<span class="col-md-6">
+					<label>Κινητό:</label>
+					<p  ng-bind="$storage.localuser.mobile"></p>
+					<label>Email:</label>
+					<p  ng-bind="$storage.localuser.email"></p>
+					<label>Αριθμός Δεη:</label>
+					<p  ng-bind="$storage.localuser.dehnumber"></p>
+				</span>
+			</span>
+			
+		</fieldset>
+	</div>
+	<div class="row">
+		<fieldset class="col-md-5">
+			 <legend>Η τοποθεσία σας:</legend>
+			 <span class="row">
+				<span class="col-md-6">
+					<label>Νομός:</label>
+					<p  ng-bind="$storage.localuser.area"></p>
+					<label>Διεύθυνση:</label>
+					<p  ng-bind="$storage.localuser.street"></p>
+				</span>
+				<span class="col-md-6">
+					<label>Πόλη:</label>
+				<p  ng-bind="$storage.localuser.city"></p>
+				
+				</span>
+			</span>	
+				
+			
+		</fieldset>
+
+		<fieldset class="col-md-7">
+			<legend>Στοιχεία εισόδου:</legend>
+			<span class="row">
+				<span class="col-md-6">
+					 
+					 <label>Όνομα χρήστη:</label>
+					<p  ng-bind="$storage.localuser.username"></p>
+				</span>
+				<span class="col-md-6">
+					<label>Kωδικός:</label>
+					<input type="password" ng-model="$storage.localuser.password" ng-disabled="true"/>
+					
+				</span>
+			</span>
+			
+			
+		</fieldset>
+	</div>
+	<small>*Σε αυτο το βήμα μπορείς να γυρίσεις σε οποιοδήποτε απο τα αλλα βηματα για να αλλαξεις τα στοιχεία σου</small>
+</form>
+
+</section>

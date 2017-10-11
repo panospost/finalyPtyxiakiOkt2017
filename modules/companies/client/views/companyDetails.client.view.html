@@ -1,0 +1,39 @@
+<section ng-controller="CompaniesController" ng-init="findTwo()">
+
+	<div >
+		<label>Τιμή πετρελαίου:</label>
+		  <span ng-bind="company.pricepL"></span> Ευρω/λιτρο<p></p>
+		  <label>Πόλη:</label><span  ng-bind="company.city"></span><p></p>
+		 <label>Διεύθυνση:</label> <span  ng-bind="company.address"></span><p></p>
+		 <label>Tηλεφωνο:</label> <span  ng-bind="company.phonenumber"></span>
+		 <label>Ιδιοκτήτης:</label> <span  ng-bind="company.user.displayName"></span>
+	</div>
+	
+	<ui-gmap-google-map
+	 dorebuildall="true" 
+                center='map1.center'
+                zoom='9'
+                draggable="map1.draggable"
+                options="options"
+				control="map1.control">
+				<ui-gmap-marker
+                    coords="marker1.coords"
+                    options="marker1.options"
+					
+                    idkey="marker1.id">
+            </ui-gmap-marker>
+			 
+			 <ui-gmap-marker
+                    coords="cmarker1.coords"
+                    options="cmarker1.options"
+					
+                    idkey="cmarker1.id">
+            </ui-gmap-marker>
+		
+
+            
+        </ui-gmap-google-map>
+	
+	
+  	 <button class="btn btn-success" ui-sref="companies.order({companyId: company.companyname,companyprice:company.pricepL})">Παραγγείλετε απο <p ng-bind="company.companyname"></p></button>
+</section>

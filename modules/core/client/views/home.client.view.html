@@ -1,0 +1,159 @@
+<span    ng-controller="HomeController" >
+	
+
+
+	<div   flex ng-controller="AuthenticationController" ng-hide="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" ng-cloak layout-gt-sm="column" layout="column">
+	<!--
+   
+<md-input-container class="md-block">
+              <label style="text-align:center">Your password</label>
+              <input ng-model="login.user.password" type="password" required>
+            </md-input-container>
+		
+	  </div>-->
+	  <div style="opacity:0.9;"  flex layout="column" layout-align="center center" class="text-center">
+	  <img alt="E-πρατήριο" style="display:block;width:15em;height:15em;opacity:0.9;"  src="modules/core/client/img/brand/logo.png" />
+	                <h3 style="color:#212121;" class="text-center">Καλως ήρθατε στο E-πρατήριο, τι προσφέρουμε:</h3>
+              <md-button class="text-center" style="width:50%;background-color:red;color:white;" class="button btn" ui-sref="companies.forGuests" >Δειτε ποια πρατηρια μπορουν να σας εξυπηρετησουν χωρις εγγραφη</md-button>
+	 </div>
+	 
+	   
+	  <span layout="row" style="opacity:0.8;">
+	   <div flex-gt-sm="15"></div>
+	<div  flex-gt-sm="30" flex>
+		 <md-content style="opacity:0.9;background-color:#B3E5FC;" >
+    
+			<md-subheader class="md-no-sticky">Eίστε πρατηριούχος;</md-subheader>
+		   
+
+			  <md-list class="md-dense" flex>
+			 
+			   
+			   
+					<md-list-item class="md-2-line" >
+					
+					  <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+						
+						<p> Το E-πρατήριο είναι το εργαλείο που χρειάζεστε,για την εξυπηρέτηση των πελατών σας</p>
+					  </div>
+				   
+					</md-list-item>
+				<md-divider></md-divider>
+				
+					<md-list-item class="md-2-line" >
+					
+					  <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+					   
+						<p> Διαχειριστείτε όλους τους πελάτες σας μέσα απο το portal</p>
+					  </div>
+				   
+					</md-list-item>
+				<md-divider></md-divider>
+					<md-list-item class="md-2-line" >
+					
+					  <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+						
+						<p> Βρείτε την βέλτιστη διαδρομή για την παράδοση των παραγγελιών</p>
+					  </div>
+				   
+					</md-list-item>
+			  </md-list>
+     </md-content>
+    
+		
+  </div>
+
+ <div flex-gt-sm="10"></div>
+
+  <div flex-gt-sm="30" flex>
+		 <md-content style="opacity:0.9;background-color:#B3E5FC;">
+    
+			<md-subheader class="md-no-sticky">Eίστε πελάτης;</md-subheader>
+		   
+
+			  <md-list class="md-dense" flex>
+			 
+			   
+			   
+					<md-list-item class="md-2-line" >
+					
+					  <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+						
+						<p> Παράγγειλε πετρέλαιο θέρμανσης 	εύκολα και γρήγορα</p>
+					  </div>
+				   
+					</md-list-item>
+				<md-divider></md-divider>
+				
+					<md-list-item class="md-2-line" >
+					
+					  <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+					   
+						<p> Βρείτε τα πρατήρια που σας εξυπηρετούν στην περιοχή σας</p>
+					  </div>
+				   
+					</md-list-item>
+				<md-divider></md-divider>
+					<md-list-item class="md-2-line" >
+					
+					  <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+						
+						<p> Συγκρίνετε τιμές και κάντε την σωστή επιλογή για την παραγγελία σας</p>
+					  </div>
+				   
+					</md-list-item>
+			  </md-list>
+     </md-content>
+  </div>
+	</span>  
+	</div> 
+	
+	<div flex layout="row" layout-align="center center" ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'">
+
+	
+	    
+		<div  flex-gt-sm="25" flex-gt-md="30" flex-gt-lg="50" style="opacity:0.9;padding-top:7em;" >
+			<h3><strong>Καλώς όρισες <span ng-bind="authentication.user.displayName"></strong></h3>
+			<span  layout="column" style="background-color:rgba(255,255,255,0.3);padding-left:2em;padding-left:2em;">
+				<p>H διεύθυνση σας:</p>
+				<p><i class="fa fa-map-marker fa-4x" aria-hidden="true"></i><span ng-bind="authentication.user.street"></span></p>
+				
+				<div ng-show="authentication.user.street2!=null">
+					<p><b>Παράγγειλετε με την εναλλακτική τοποθεσία:</b></p>
+				<span layout="row"><span style="color:black;margin-top:1.5em;" ng-bind="authentication.user.street2"></span><md-button  class="md-fab md-warn" ui-sref="enallaktiki"><i class="fa fa-arrow-right" aria-hidden="true"></i></md-button>
+				</span>
+				</div>
+				
+				<p  ng-hide="authentication.user.street2!=null">Προσθήκη εναλλακτικης Τοποθεσιας:&nbsp;<md-button class="md-fab"  ng-controller="SignUpController" ng-click="enallaktikiTopo8esia($event)">+</md-button></p>
+			</span>
+			
+		</div>
+		
+		<div  flex-gt-sm="10" flex-gt-md="15" flex-gt-lg="40" style="opacity:0.9;padding-top:10em;padding-left:1em;margin-top:1.5em;">
+			<p align="justify" ng-hide="authentication.user.street2!=null">Μέχρι στιγμής μπορείτε να παραγγείλετε μόνο απο την αρχική διεύθυνση, μπορείτε να δηλώσετε και εναλλακτική τοποθεσία με το κουμπί αριστερά</p>
+			<p align="justify" ng-show="authentication.user.street2!=null">Έχετε δηλώσει και εναλλακτική τοποθεσία παραγγελίας, μπορείτε να παραγγείλετε απο εκεινη την τοποθεσία
+			χρησιμοποιώντας το κουμπί αριστερά </p>
+			<md-button style="background-color:#03A9F4;" class="md-raised" ui-sref="UserHome.homePage">Παραγγειλε Τωρα!</md-button>
+		</div>		
+		
+		   
+		
+	  
+	  
+	</div> 
+	<div  ng-show="authentication.user.roles == 'admin'" ng-controller="AdminController" class="row">
+		 <div  class="row" style="height:22em;" >
+		  <span class="col-md-4" ></span>
+		   <span class="col-md-4" >
+						<h2 class="text-center">Σελίδα διαχείρισης συστήματος</h2>
+		<ul class="nav nav-pills nav-stacked">
+				<li><a class="btn btn-default btn-sm" ui-sref="admin.list">Λίστα χρηστών</a></li>
+				<li><a class="btn btn-default btn-sm" ui-sref="adminmessages">Προβολή των μυνημάτων</a></li>
+				
+				
+		 </ul>
+		</span>
+		  <span class="col-md-4" ></span>
+		</div>
+	</div>
+</span>

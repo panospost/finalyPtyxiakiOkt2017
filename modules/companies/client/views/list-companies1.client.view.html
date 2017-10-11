@@ -1,0 +1,138 @@
+<section ng-controller="CompaniesController" ng-init="find()" flex layout="row" layout-align="center center">
+
+
+ <div  style="opacity:0.9;margin:5em;"flex-sm="100"  flex-gt-sm="90" flex-gt-md="60" flex-gt-lg="50">
+  
+	   <md-list flex="">
+			<md-subheader  ng-hide="companies1.length===0" class="md-no-sticky">Πρατήρια που καταχωρήσατε</md-subheader>
+			<md-subheader ng-show="companies1.length===0" class="md-no-sticky">Δεν εχετε καταχωρήσει ακόμα κανένα πρατήριο. 
+			Καταχωρήστε ενα πρατήριο <button  class="btn  btn-info" ui-sref="companies.create" >  Eδω
+								  
+								</button></md-subheader>
+		  <md-list layout-padding>
+			<md-list-item layout-align="center center" class="md-whiteframe-17dp md-2-line" style="background-color:white;opacity:0.9;padding:1em;" ng-repeat="company in companies1" >
+				
+				<i class="fa fa-truck fa-5x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+				
+				<div class="md-list-item-text">
+					<div layout="column">
+					<h3 >Όνομα Πρατηρίου:&nbsp; {{company.companyname}}</h3> 
+					<h3 >Τιμή/λίτρο:&nbsp;{{company.pricepL}}€</h3>
+					<h3 >Διεύθυνση:&nbsp; {{company.address}}</h3> 
+					<h3 >Τηλέφωνο:&nbsp; {{company.phonenumber}}</h3>
+						
+					</div>
+					<md-divider ></md-divider>
+				
+				</div>
+				<div layout="column">
+					<span >
+								<button style="width:7em;" class="btn  btn-danger" ng-click="remove(company._id,companies1,company)" >
+	
+								  <i class="glyphicon glyphicon-trash"></i>
+								  
+								</button>
+						</span>
+						<span >
+					<button style="width:7em;"  class="btn  btn-warning" ui-sref="companies.edit({companyId: company._id})" >
+	
+								   Ρυθμίσεις
+								  
+								</button>
+					</span>
+					<span >
+								<button	style="width:7em;" class="btn  btn-info" ui-sref="companies.view({companyId: company._id})" >
+	
+								   Παραγγελίες
+								  
+								</button>
+						</span>
+						
+					
+				</div>
+				
+			</md-list-item>
+		 </md-list>
+   
+   
+</div>
+  <!--
+  <div style="margin-bottom:3em;color:gray"class="text-center">
+    <h1>Τα πρατήρια μου</h1>
+  </div>
+   <div class="row">
+	<span class="col-md-1"></span>
+	<span style="text-decoration:underline;" class="col-sm-2 col-md-2 text-center" >Oνομα Πρατηρείου</span> 
+	<span   style="text-decoration:underline;" class="text-center col-sm-2 col-md-2">Διεύθυνση</span>
+	<span class="col-md-1 col-sm-2 "></span> 
+	<span class="col-sm-5 col-md-5"></span>	
+ </div>
+ <hr>
+ </div>
+   <div class="row">
+	   <nav >
+	   
+		   <ul class="nav nav-pills nav-stacked">
+				
+				
+				<li  ng-repeat="company in companies1">
+				<span id="viewcompany" style="height:4em;" class="list-group-item text-center" >
+				
+					<span class="col-sm-1 col-md-1">
+								<button style="position:relative;bottom:0.5em;margin-left:5em;" class="btn  btn-info" ng-click="remove(company._id,companies1,company)" >
+	
+								  <i class="glyphicon glyphicon-trash"></i>
+								  
+								</button>
+						</span>
+ 						
+						<span  class="col-sm-2 col-md-2"  ng-bind="company.companyname" ></span> 
+						<span style="padding-left:3em;" ng-bind="company.address"  class="col-sm-2 col-md-2"></span>
+						<span class="col-sm-2 col-md-2">
+					<button style="position:relative;bottom:0.5em;margin-right:-6em;" class="btn  btn-info" ui-sref="companies.edit({companyId: company._id})" >
+	
+								   Επεξεργασία Στοιχείων
+								  
+								</button>
+					</span>
+					<span class="col-sm-2 col-md-2">
+								<button style="position:relative;bottom:0.5em;" class="btn  btn-info" ui-sref="companies.view({companyId: company._id})" >
+	
+								   Προβολή & Επεξεργασία παραγγελιών
+								  
+								</button>
+						</span>
+						
+					<span class="col-sm-2 col-md-2">
+								<button style="position:relative;bottom:0.5em;" class="btn  btn-info" ui-sref="companies.createDrivers({companyId: company._id})" >
+	
+								  Καταχώρηση οδηγών
+								  
+								</button>
+						</span>
+						
+						
+				</span>
+				</li>
+			</u>
+		</nav>
+		
+  </div>
+  
+  
+  <div class="alert alert-warning text-center" ng-if="companies1.$resolved && !companies1.length">
+   Δεν έχετε δημιουργήσει εταιρεία; <a ui-sref="company.create">Δημιουργήστε μια</a>?
+  </div>
+  
+
+		
+			
+			
+			
+			
+			  
+            
+       
+  
+  -->
+</section>

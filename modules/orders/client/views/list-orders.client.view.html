@@ -1,0 +1,36 @@
+<section ng-controller="OrdersController" ng-init="find()">
+  <div class="page-header">
+    <h1>Οι παραγγελίες σας</h1>
+  </div>
+  
+ 
+  <div ui-grid="gridOptions" ui-grid-selection  class="myGrid"></div>
+  <button ng-click="open('lg')">Pare ta objects pou dialekses :) </button>
+  <button ng-click="">Allo modal  </button>
+  
+  
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Δημιουργία Δρομολογίου</h3>
+        </div>
+        <div class="modal-body">
+		
+         <span id="grid1" ui-grid="gridOptions1"  class="gridmodal"></span>
+		 <span>
+		 <ui-gmap-google-map center="map2.center" zoom="map2.zoom" 
+		 draggable="map2.draggable" options="options"control="mapctr2"> 
+		 <ui-gmap-marker ng-repeat="marker in markers3" idKey="marker.id" 
+		 coords="marker.coordinates" click="markerClick(marker)">
+		 <ui-gmap-window show="marker.show" options="marker.options"
+		 closeClick="markerClose(marker)" templateUrl="map2.windowTemplate"
+		 templateParameter="map2.windowParameter(marker)" ng-cloak="">
+		 </ui-gmap-window></ui-gmap-marker></ui-gmap-google-map>
+		</span>
+		</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+  
+</section>

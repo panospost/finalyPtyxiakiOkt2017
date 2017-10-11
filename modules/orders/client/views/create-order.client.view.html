@@ -1,0 +1,176 @@
+<section ng-controller="OrdersController" ng-init="findcompanies()">
+ 
+	<form name="orderForm" class="form-horizontal " ng-submit="create(orderForm.$valid)" novalidate>
+		 
+		 
+	
+				
+				 
+					<div class="form-group" >
+							<label for="company" class="control-label">Όνομα Πρατήρειου:</label>
+								<div>
+									<select style="width:250px;" name="company1"  class="form-control" ng-model="company"    ng-options="choice.companyname for choice in companies" >
+											<option value="" disabled selected>Διαλέξτε Πρατήρειο</option>				
+										</select>
+								</div>	
+					</div>
+					<div  class="form-group" show-errors>
+								  <label for="typeOfOrder" class=" control-label">Eίδος Παραγγελίας</label>
+								 
+									 <select style="width:250px;" name="typeOfOrder" class="form-control" ng-model="typeOfOrder" ng-options="choice for choice in tporder " required>
+												<option value="" disabled selected>Διαλέξτε Τυπο Παραγγελίας</option>				
+										</select>
+									
+				   </div>
+					 <div  class="form-group " show-errors>
+						   <label for="payment" class=" control-label">Τρόπος Πληρωμής</label>
+							 <select style="width:250px;" name="payment" class="form-control"  ng-model="payment" ng-options="choice for choice in waypayment " >
+										<option value="" disabled selected>Διαλέξτε Τρόπο Πληρωμής</option>				
+							</select>						
+					</div>
+							   
+					<div  class="form-group" show-errors>
+							  
+						<label for="quantity" class=" control-label"> Ποσότητα λίτρων:</label>
+						<input style="width:250px;" type="number" ng-click="calc()" name="quantity" ng-model="quantity" min="50" max="500" id="quantity" class="form-control"  placeholder="Ποσότητα" required/>
+						<div ng-messages="orderForm.quantity.$error" role="alert">
+								<p class="help-block error-text" ng-message="required">quantity is required.</p>
+						 </div>
+					</div>	
+			
+					<div  class="form-group" show-errors>
+							 <label for="hour" class="control-label">Ώρα διανομής</label>
+							 <select style="width:250px;" name="hour"  ng-model="hour" class="form-control" ng-options="choice for choice in hours track by choice " required>
+											<option value="" disabled selected>Διαλέξτε Ώρα διανομής</option>					
+							</select>
+							 <div ng-messages="orderForm.hour.$error" role="alert">
+									<p class="help-block error-text" ng-message="required">hour is required.</p>
+							 </div>
+					</div>		
+		
+					<div class="form-group" show-errors>
+								  
+						 <label for="duedate" class=" control-label">Ημερομηνία παράδοσης:</label>
+								 
+						 <uib-datepicker  name="duedate" ng-model="duedate" min-date="afterTomorrow" ng-click="dd()" datepicker-options="dateOptions"></uib-datepicker>
+								 
+						<div ng-messages="orderForm.duedate.$error" role="alert">
+									<p class="help-block error-text" ng-message="required">duedate is required.</p>
+						</div>
+					</div>
+						<div  class="form-group text-center" show-errors>
+				
+								 <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;Υποβολή Παραγγελίας</button>
+							  
+						</div>
+						<div ng-show="error" class="text-danger">
+							  <strong ng-bind="error"></strong>
+						</div>
+				
+				  <div style="left:14px;" class="form-group" show-errors>
+						   <label for="pricetp">Συνολικό κόστος:</label>
+						   <input style="width:250px;" type="number" name="pricetp" ng-model="pricetp" id="pricetp" class="form-control" value="{{quantity*company.pricepL}}"placeholder="Λεφτα προς πληρωμη" disabled/>
+						
+				 </div>				
+					
+				 <div  class="form-group" show-errors>
+				   <label for="message" class=" control-label"></label>
+					<textarea rows="4" style="resize: none;" cols="50" name="message" ng-model="message" id="message" class="form-control"  placeholder="Κατι σχετικό με την Παραγγελία σας(Προαιρετικο)"></textarea>
+				  </div>
+			 
+			
+		
+		 
+    </form>
+
+ <!--
+  <div class="row">
+    <form name="orderForm" class="form-horizontal " ng-submit="create(orderForm.$valid)" novalidate>
+		 
+		 
+		 <span class="col-md-1"></span>
+				
+				 <fieldset class="stoixeiaOrder col-md-3" > 
+					<legend>Στοιχεία Παραγγελίας:</legend>
+					<div class="form-group" >
+							<label for="company" class="control-label">Όνομα Πρατήρειου:</label>
+								<div>
+									<select style="width:250px;" name="company1"  class="form-control" ng-model="company"    ng-options="choice.companyname for choice in companies" >
+											<option value="" disabled selected>Διαλέξτε Πρατήρειο</option>				
+										</select>
+								</div>	
+					</div>
+					<div  class="form-group" show-errors>
+								  <label for="typeOfOrder" class=" control-label">Eίδος Παραγγελίας</label>
+								 
+									 <select style="width:250px;" name="typeOfOrder" class="form-control" ng-model="typeOfOrder" ng-options="choice for choice in tporder " required>
+												<option value="" disabled selected>Διαλέξτε Τυπο Παραγγελίας</option>				
+										</select>
+									
+				   </div>
+					 <div  class="form-group " show-errors>
+						   <label for="payment" class=" control-label">Τρόπος Πληρωμής</label>
+							 <select style="width:250px;" name="payment" class="form-control"  ng-model="payment" ng-options="choice for choice in waypayment " >
+										<option value="" disabled selected>Διαλέξτε Τρόπο Πληρωμής</option>				
+							</select>						
+					</div>
+							   
+					<div  class="form-group" show-errors>
+							  
+						<label for="quantity" class=" control-label"> Ποσότητα λίτρων:</label>
+						<input style="width:250px;" type="number" ng-click="calc()" name="quantity" ng-model="quantity" min="50" max="500" id="quantity" class="form-control"  placeholder="Ποσότητα" required/>
+						<div ng-messages="orderForm.quantity.$error" role="alert">
+								<p class="help-block error-text" ng-message="required">quantity is required.</p>
+						 </div>
+					</div>	
+				</fieldset>
+				<fieldset class="date&time col-md-3">
+				<legend>'Ωρα/Ημερομηνία παραγγελίας:</legend>
+					<div  class="form-group" show-errors>
+							 <label for="hour" class="control-label">Ώρα διανομής</label>
+							 <select style="width:250px;" name="hour"  ng-model="hour" class="form-control" ng-options="choice for choice in hours track by choice " required>
+											<option value="" disabled selected>Διαλέξτε Ώρα διανομής</option>					
+							</select>
+							 <div ng-messages="orderForm.hour.$error" role="alert">
+									<p class="help-block error-text" ng-message="required">hour is required.</p>
+							 </div>
+					</div>		
+		
+					<div class="form-group" show-errors>
+								  
+						 <label for="duedate" class=" control-label">Ημερομηνία παράδοσης:</label>
+								 
+						 <uib-datepicker  name="duedate" ng-model="duedate" min-date="afterTomorrow" ng-click="dd()" datepicker-options="dateOptions"></uib-datepicker>
+								 
+						<div ng-messages="orderForm.duedate.$error" role="alert">
+									<p class="help-block error-text" ng-message="required">duedate is required.</p>
+						</div>
+					</div>
+						<div  class="form-group text-center" show-errors>
+				
+								 <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;Υποβολή Παραγγελίας</button>
+							  
+						</div>
+						<div ng-show="error" class="text-danger">
+							  <strong ng-bind="error"></strong>
+						</div>
+				</fieldset>
+			<fieldset class="messageprice col-md-3">
+				<legend>Κοστος/Μυνημα στον προμηθευτη:</legend>
+				  <div style="left:14px;" class="form-group" show-errors>
+						   <label for="pricetp">Συνολικό κόστος:</label>
+						   <input style="width:250px;" type="number" name="pricetp" ng-model="pricetp" id="pricetp" class="form-control" value="{{quantity*company.pricepL}}"placeholder="Λεφτα προς πληρωμη" disabled/>
+						
+				 </div>				
+					
+				 <div  class="form-group" show-errors>
+				   <label for="message" class=" control-label">Μυνημα:</label>
+					<textarea rows="4" style="resize: none;" cols="50" name="message" ng-model="message" id="message" class="form-control"  placeholder="Κατι σχετικό με την Παραγγελία σας(Προαιρετικο)"></textarea>
+				  </div>
+			 </fieldset>
+			 <span class="col-md-1"></span>
+		
+		 
+    </form>
+  </div>-->
+</section>

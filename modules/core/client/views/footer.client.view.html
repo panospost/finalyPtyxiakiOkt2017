@@ -1,0 +1,115 @@
+ <section ng-controller="HomeController" >
+ <!-- <div ng-hide="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" layout="row">
+		<footer class="foo">
+			<div >
+				<div flex class="">
+					<div flex="100">
+						<nav class="nav-footer">
+							<ul>
+								<li><a ui-sref="home">Αρχικη</a></li>	
+								<li><a ui-sref="signup.role">Eγγραφή</a></li>								
+								<li><a ui-sref="newMessage">Επικοινωνία</a></li>
+								<li><a ui-sref="about.html">Σχετικα με εμας</a></li>
+								<li><a ui-sref="policy.html">Όροι χρήσης</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-6">
+						<small class="copyright">Copyright © 2016 Panagiotis Postantsidis - All rights reserved</small>
+						<div class="">
+							<a style="margin-left:7em;" class="facebook"><img alt="E-πρατήριο"   src="modules/core/client/img/facebook.png" /></a>
+							<a class="twitter"><img alt="E-πρατήριο"   src="modules/core/client/img/twitter.png" /></a>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>  
+</div>
+
+<div  ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'" class="row">
+			<footer class="foo">
+			<div class="">
+				<div class="row">
+					<div class="col-md-6">
+						<nav class="nav-footer">
+							<ul>
+								<li><a ui-sref="home">Αρχικη</a></li>								
+								<li><a ui-sref="newMessage">Επικοινωνία</a></li>
+								<li><a ui-sref="about.html">Σχετικα με εμας</a></li>
+								<li><a ui-sref="policy.html">Όροι χρήσης</a></li>
+								<li><a href="/api/auth/signout" target="_self">Εξοδος</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-6">
+						<small class="copyright">Copyright © 2016 Panagiotis Postantsidis - All rights reserved</small>
+						<div class="">
+							<a style="margin-left:7em;" class="facebook"><img alt="E-πρατήριο"   src="modules/core/client/img/facebook.png" /></a>
+							<a class="twitter"><img alt="E-πρατήριο"   src="modules/core/client/img/twitter.png" /></a>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer> 
+		 
+</div>-->
+<div layout="row" layout-padding class="bg-dark-blue nav-dark" layout-align="space-between center">
+<div>
+    <md-button ui-sref="home" >Αρχική</md-button>
+    <md-button ui-sref="home">Σχετικά με εμας</md-button>
+    <md-button ui-sref="home" >Εφαρμογές Android</md-button>
+    <md-menu>
+        <md-button ui-sref="home" md-menu-origin ng-click="$mdOpenMenu()">Βοήθεια</md-button>
+        <md-menu-content width="2">
+            <md-menu-item>
+                <md-button ui-sref="home" >Οδηγίες</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ui-sref="home">About</md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>
+<div class="nav-buttons">
+	<md-button ng-click="showAdvanced($event)" aria-label="Favorite" ng-hide="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'">
+          ΣYνδεση
+        </md-button>
+    <md-button ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'" href="/api/auth/signout" class="md-raised md-accent">My profile</md-button>
+    <md-button ui-sref="signout"  target="_self" ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'pratiriouxos'||authentication.user.roles == 'admin'"  class="md-raised md-warn">Log Out</md-button>
+</div>
+
+<!--
+  <div layout="row" layout-align="center center">
+            <nav md-toolbar class="md-tall md-toolbar-tools" layout="row" layout-align="center" >
+							
+								<md-button ui-sref="home" aria-label="Αρχικη">
+									Αρχικη
+								</md-button>	
+								<md-button ui-sref="newMessage" aria-label="Αρχικη">
+										Επικοινωνία
+								</md-button>
+								<md-button ui-sref="newMessage" aria-label="Αρχικη">
+										Σχετικα με εμας
+								</md-button>
+								<md-button ui-sref="newMessage" aria-label="Αρχικη">
+										Όροι χρήσης
+								</md-button>
+								<md-button href="/api/auth/signout" aria-label="Αρχικη">
+										Εξοδος
+								</md-button>
+								
+							
+						</nav>
+					<div flex="30">
+						<small class="copyright">Copyright © 2016 Panagiotis Postantsidis - All rights reserved</small>
+						<div class="">
+							<a ui-sref="newMessage" style="margin-left:7em;" class="facebook"><img alt="E-πρατήριο"   src="modules/core/client/img/facebook.png" /></a>
+							<a ui-sref="newMessage" class="twitter"><img alt="E-πρατήριο"   src="modules/core/client/img/twitter.png" /></a>
+							
+						</div>
+					</div>
+        </div>-->
+
+	</section>

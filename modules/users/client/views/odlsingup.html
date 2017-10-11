@@ -1,0 +1,293 @@
+<section ng-controller="SignUpController">
+	<span class="row">
+		<span class="col-md-1"></span>
+	 <md-content  class="col-sm-9 col-md-10">
+		<md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex" >
+		<md-tab label="Διαλέξτε ρόλο"  ng-disabled="first">
+					<md-content class="md-padding" style="min-height:30em;" >
+					<span class="row">
+							<span class="col-md-2"></span>
+							<p class="col-md-4">Αν επιθυμείτε  να παραγγείλετε πετρέλαιο κίνησης η θέρμανσης εύκολα και γρήγορα επιλέξτε το κουμπί ΠΕΛΑΤΗΣ </p>
+							
+							<p class="col-md-4">Αν είστε πρατηριούχος και θέλετε να εγγράψατε το πρατήριο σας στην υπηρεσία μας για διευκόλυνση στην διεκπαιρέωση των παραγγελιών επιλέξτε το κουμπί ΠΡΑΤΗΡΙΟΥΧΟΣ</p>
+					</span>
+					   <span class="row">	
+							<span class="col-md-2"></span>					   
+								<div class="text-center form-group  col-md-4">
+								<button class="btn btn-info text-center" ng-click="clientNext()">ΠΕΛΑΤΗΣ</button>
+								</div>
+								 <div class="text-center form-group col-md-4">
+								 <button class="btn btn-info btn" ng-click="pratnext()">ΠΡΑΤΗΡΙΟΥΧΟΣ</button>
+								 </div>
+							 </span>
+					</md-content>
+		  </md-tab>
+		  <md-tab label="Οι προσωπικές πληροφορίες σας" ng-disabled="second">
+				<md-content  class="md-padding" style="min-height:30em;">
+						
+						<form name="personalInfo" ng-submit="Next(personalInfo.$valid)" class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4" novalidate>
+							<div class="form-group" show-errors>
+									  <label for="firstName">Όνομα:</label>
+									  <input type="text" id="firstName" name="firstName" class="form-control" ng-model="preUser.firstName" placeholder="First Name" required/>
+									  <div ng-messages="personalInfo.firstName.$error" role="alert">
+										<p ng-show="personalInfo.firstName.$error.required" class="help-block error-text" ng-message="required">Το πρώτο όνομα απαιτείται.</p>
+									  </div>
+							</div>
+							<div class="form-group" show-errors>
+									  <label for="lastName">Επίθετο:</label>
+									  <input type="text" id="lastName" name="lastName" class="form-control" ng-model="preUser.lastName" placeholder="Last Name" required/>
+									  <div ng-messages="personalInfo.lastName.$error" role="alert">
+										<p ng-show="personalInfo.lastName.$error.required" class="help-block error-text" ng-message="required">Last name is required.</p>
+									  </div>
+							</div>
+							<div class="form-group" show-errors>
+									  <label for="email">Email:</label>
+									  <input type="email" id="email" name="email" class="form-control" ng-model="preUser.email" placeholder="Email" lowercase required/>
+									  <div ng-messages="personalInfo.email.$error" role="alert">
+										<p ng-show="personalInfo.email.$error.required" class="help-block error-text" ng-message="required">To email απαιτείται.</p>
+
+									  </div>
+							</div>
+							<div class="form-group" show-errors>
+									  <label for="phonenumber">Σταθερό Tηλεφωνο:</label>
+									  <input type="number" id="phonenumber" name="phonenumber" class="form-control" ng-model="preUser.phonenumber" ng-minlength="10" placeholder="2310..."  required/>
+									  <div ng-messages="personalInfo.phonenumber.$error" role="alert">
+										<p  ng-show="personalInfo.phonenumber.$error.required" class="help-block error-text" ng-message="required">To σταθερο τηλέφωνο απαιτείται.</p>
+									   <p  ng-show="personalInfo.phonenumber.$error.minlength" class="help-block error-text" ng-message="required">To σταθερο τηλέφωνο εχει πιο πολλά στοιχεία.</p>
+									   
+									  </div>
+							</div>
+							<div class="form-group" show-errors>
+									  <label for="mobile">Κινητό Tηλεφωνο:</label>
+									  <input type="number" id="mobile" name="mobile" class="form-control" min="6900000000" max="6999999999"ng-model="preUser.mobile" placeholder="69..." required/>
+									  <div ng-messages="personalInfo.mobile.$error" role="alert">
+											<p  ng-show="personalInfo.mobile.$error.required" class="help-block error-text" ng-message="required">To κινητό τηλέφωνο απαιτείται.</p>
+									   
+									   
+									  </div>
+							</div>
+						   <div  class="form-group " show-errors>
+								  <label for="dehnumber" class=" control-label">Αριθμός ΔΕΗ:</label>
+								   <input   type="number" name="dehnumber" ng-model="preUser.dehnumber"   id="dehnumber" class="form-control" ng-minlength="6" placeholder="Aριθμός λογαριασμού δεη" required/>
+									  <div ng-messages="personalInfo.dehnumber.$error" role="alert">
+											<p ng-show="personalInfo.dehnumber.$error.required" class="help-block error-text" ng-message="required">O αριθμός δεή απαιτείται</p>
+											<p ng-show="personalInfo.dehnumber.$error.minlength" class="help-block error-text" ng-message="required">O αριθμός δεή εχει πιο πολλά ψηφία</p>
+									   
+									  </div>
+							</div>
+							 <div class="form-group">
+										<button  class="btn-success btn" >Eπόμενο βημα</button>
+										<button class="btn btn-warning btn" type="button" ng-click="Back()">Προηγούμενο Βήμα</button>
+							</div>
+					
+			   
+      
+		   </form>
+				</md-content>
+			 </md-tab>
+		 <md-tab label="Η τοποθεσία σας" ng-disabled="third">
+			<md-content class="md-padding" style="min-height:30em;">
+				<span class="row">
+	<form name="locForm"  style="padding:2em;margin:1em;" ng-submit="Next(locForm.$valid)" class="col-md-6" novalidate>
+				<div class="form-group " show-errors>
+						
+						
+						<div class="field" style="width:250px;" name="street" ng-model="preUser.street" id="searchboxWrapper"><label>Η Διεύθυνση σας:</label></div>
+						<div ng-messages="locForm.street.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">H διεύθυνση απαιτείται.</p>
+					  </div>
+					</div>	
+				
+					<div class="form-group" show-errors>
+					  <label for="city">Πόλη:</label>
+					  <input type="text" style="width:250px;" id="city" name="city" class="form-control" ng-model="preUser.city" placeholder="Πχ Θεσσαλονίκη"  required>
+					  <div ng-messages="locForm.city.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">Η πόλη απαιτείται.</p>
+					  </div>
+					</div>
+				
+					<div class="form-group " >
+					  <label for="area"> Νομός:</label>
+					  <div>
+						<select  style="width:250px;" name="area" class="form-control" placeholder="Διάλεξε Νομό" ng-model="preUser.area" ng-options="choice for choice in areas" >
+									<option value="" disabled selected>Διαλέξτε Noμό</option>			
+							</select>
+							</div>
+							<div ng-messages="locForm.area.$error" role="alert">
+						<p class="help-block error-text" ng-message="required">O νομός απαιτείται.</p>
+					  </div>
+				   </div>
+			
+					
+				
+				
+				<div class="form-group">
+							<button  class="btn-success btn" >Eπόμενο βημα</button>
+							<button class="btn btn-warning btn" type="button" ng-click="Back()">Προηγούμενο Βήμα</button>
+			    </div>
+				
+				
+			</form>
+			
+				<span class=".col-md-6">
+
+					<div id="map-canvas1 "  >
+					<ui-gmap-google-map
+							control="map1.control"
+							center='map1.center'
+							zoom='map1.zoom'
+							draggable="map1.draggable"
+							options="options1">
+						<ui-gmap-marker
+								coords="marker1.coords"
+								options="marker1.options"
+								 events="marker1.events"
+								idkey="10">
+						</ui-gmap-marker>
+						<ui-gmap-search-box  template="searchbox.template" parentdiv="'searchboxWrapper'" events="searchbox.events" ></ui-gmap-search-box>
+					</ui-gmap-google-map>
+					<script type="text/ng-template" id="searchbox.tpl.html">
+					   <input  type="text"   class="form-control" placeholder="Γράψτε την ακριβής διεύθυνση του σπιτιού σας.." name="preUser.street" ng-model="preUser.street" ng-minlength="5" required />
+					</script>	
+						
+				</div>
+				<small>*Βεβαιωθείτε οτι ο δείκτης ειναι στην θέση του σπιτιού σας</small>
+					<small>Σε περίπτωση λάθους αφήστε εμας να βρούμε αυτόματα τις θέσεις σας.<button type="button" ng-click="getLocation()">Διόρθωση τοποθεσίας</button> </small>
+					<p><small>Aμα ακόμα υπάρχει πρόβλημα στείλτε email στο panospost1@gmail.com </small></p>
+				</span>
+			</span>
+		   </md-content>
+		  </md-tab>
+		  <md-tab label="Κωδικός και Username" style="min-height:30em;" ng-disabled="fourth">
+			<md-content class="md-padding">
+			<span class="row">
+			 <span class="col-md-4"></span>
+					<form name="credentialsForm" ng-submit="Next(credentialsForm.$valid)" class="col-md-4" novalidate>
+						   <div class="form-group" show-errors>
+								  <label for="username">Όνομα Χρήστη(id):</label>
+								  <input type="text" id="username" name="username" class="form-control" ng-model="preUser.username" placeholder="Username" lowercase required>
+								  <div ng-messages="credentialsForm.username.$error" role="alert">
+									<p class="help-block error-text" ng-message="required">Το username απαιτείται.</p>
+								  </div>
+								</div>
+								<div class="form-group" show-errors>
+								  <label for="password">Κωδικός:</label>
+								  <input type="password" id="password" name="password" class="form-control" ng-model="preUser.password" placeholder="Password" required ng-minlength="6">
+								  <div ng-messages="credentialsForm.password.$error" role="alert">
+									<p class="help-block error-text" ng-message="required">Το password απαιτείται.</p>
+									<p class="help-block error-text" ng-message="minlength">Το password ειναι πολυ μικρό.</p>
+								  </div>
+								</div>
+								<div class="form-group" show-errors>
+								  <label for="epassword">Eπαλήθευση Κωδικού:</label>
+								  <input type="password"  id="epassword" name="epassword" compare-to="preUser.password" class="form-control" ng-model="epassword" placeholder="Δώστε ξανα τον ίδιο κωδικό" required ng-minlength="6">
+								  <div ng-messages="credentialsForm.epassword.$error" role="alert">
+									<p ng-show="match" class="help-block error-text" ng-message="required">Οι κωδικοί δεν ταιριάζουν.</p>
+									<div  ng-message="compareTo">Οι κωδικοί δεν ταιριάζουν</div>
+								  </div>
+								</div>
+							<div class="form-group">
+											<button  class="btn-info btn" >Eπόμενο βημα</button>
+											<button class="btn btn-warning btn" type="button" ng-click="Back()">Προηγούμενο Βήμα</button>
+								</div>
+				  </form>
+				  <span class="col-md-4"></span>
+			  </span>
+		   </md-content>
+		  </md-tab>
+		  <md-tab label="Eπαλήθευση των στοιχείων σας" ng-disabled="five">
+			<md-content class="md-padding" style="min-height:30em;">
+				<form name="finalForm" ng-submit="signup()" >
+					<div class="row">
+						<fieldset class="col-md-5">
+						 <legend>O ρόλος που διαλέξατε:</legend>
+							<span class="row">
+							 
+								
+								
+								<span class="col-md-7">
+									<label>Ρόλος:</label><p ng-bind="preUser.roles"></p>
+									
+								</span>
+								
+							</span>
+						</fieldset>
+
+
+
+						<fieldset class="col-md-7">
+						 <legend>Τα προσωπικα σας στοιχεία:</legend>
+						
+							<span class="row">
+								<span class="col-md-6">
+									 <label>Όνομα:</label>
+									<p  ng-bind="preUser.firstName"></p>
+									<label>Επίθετο:</label>
+									<p  ng-bind="preUser.lastName"></p>
+									<label>Σταθερό τηλ:</label>
+									<p  ng-bind="preUser.phonenumber"></p>
+								</span>
+								<span class="col-md-6">
+									<label>Κινητό:</label>
+									<p  ng-bind="preUser.mobile"></p>
+									<label>Email:</label>
+									<p  ng-bind="preUser.email"></p>
+									<label>Αριθμός Δεη:</label>
+									<p  ng-bind="preUser.dehnumber"></p>
+								</span>
+							</span>
+							
+						</fieldset>
+					</div>
+					<div class="row">
+						<fieldset class="col-md-5">
+							 <legend>Η τοποθεσία σας:</legend>
+							 <span class="row">
+								<span class="col-md-6">
+									<label>Νομός:</label>
+									<p  ng-bind="preUser.area"></p>
+									<label>Διεύθυνση:</label>
+									<p  ng-bind="preUser.street"></p>
+								</span>
+								<span class="col-md-6">
+									<label>Πόλη:</label>
+								<p  ng-bind="preUser.city"></p>
+								
+								</span>
+							</span>	
+								
+							
+						</fieldset>
+
+						<fieldset class="col-md-7">
+							<legend>Στοιχεία εισόδου:</legend>
+							<span class="row">
+								<span class="col-md-6">
+									 
+									 <label>Όνομα χρήστη:</label>
+									<p  ng-bind="preUser.username"></p>
+								</span>
+								<span class="col-md-6">
+									<label>Kωδικός:</label>
+									<input type="password" ng-model="preUser.password" ng-disabled="true"/>
+									
+								</span>
+							</span>
+							
+							
+						</fieldset>
+					</div>
+					<div class="form-group">
+										<button  class="btn-info btn" >Eγγραφείτε</button>
+										<button class="btn btn-warning btn" type="button" ng-click="Back()">Προηγούμενο Βήμα</button>
+										<p style="color:red;"  ng-show="error" ng-bind="error"></p>
+							</div>
+					<small>*Σε αυτο το βήμα μπορείς να γυρίσεις σε οποιοδήποτε απο τα αλλα βηματα για να αλλαξεις τα στοιχεία σου</small>
+				</form>
+		   </md-content>
+		  </md-tab>
+	 </md-content>
+	 
+	</span>
+ 
+</section>
