@@ -1,0 +1,69 @@
+<section ng-controller="CompaniesController" ng-init="listTrucks()">
+  
+  <div style="margin-bottom:3em;color:gray"class="text-center">
+    <h1>Tα φορτηγά του πρατηρίου</h1>
+  </div>
+   <div class="row">
+   
+  	
+	<span style="text-decoration:underline;margin-left:3em;" class="col-sm-2 col-md-2 text-center" >Oνομα Φορτηγού</span>
+	<span   style="text-decoration:underline;" class="text-center col-sm-2 col-md-2">Μοντέλο</span> 
+	<span class="col-sm-2 col-md-2">Μέγεθος</span>
+<span class="col-sm-2 col-md-2">Αριθμ.Κυκλοφορίας</span>
+<span class="col-sm-2 col-md-2">Αριθμ.Ασφάλειας</span>	
+ </div>
+ <hr>
+ </div>
+   <div class="row">
+	   <nav >
+	   
+		   <ul class="nav nav-pills nav-stacked">
+				
+				
+				<li  ng-repeat="company in trucks">
+				<span id="viewcompany" style="height:4em;margin-left:5em;margin-right:4em;" class="list-group-item " >
+				
+			
+ 						
+						<span  class="col-sm-2 col-md-2 text-center"  ng-bind="company.firstName" ></span>  <span  ng-bind="company.model"  class="col-sm-2 col-md-2 text-center"></span>
+						<span class="col-sm-2 col-md-2 text-center" ng-bind="company.size">
+					
+					</span>
+						<span class="col-sm-2 col-md-2 text-center" ng-bind="company.trafficNumber">
+					
+					</span>
+						<span class="col-sm-2 col-md-2 text-center" ng-bind="company.insuranceNumber">
+					
+					</span>
+						
+					<span class="col-sm-1 col-md-1">
+								<button style="position:relative;bottom:0.5em;" class="btn  btn-info" ng-click="removeTruck( company._id,trucks,company)" >
+	
+								  Διαγραφή Φορτηγού
+								  
+								</button>
+						</span>
+				</span>
+				</li>
+			</u>
+		</nav>
+		
+  </div>
+  
+  
+  <div class="alert alert-warning text-center" ng-if="companies1.$resolved && !companies1.length">
+   Δεν έχετε δημιουργήσει οδηγό; <a ui-sref="companies.createDrivers">Δημιουργήστε μια</a>?
+  </div>
+  
+
+		
+			
+			
+			
+			
+			  
+            
+       
+  
+  
+</section>

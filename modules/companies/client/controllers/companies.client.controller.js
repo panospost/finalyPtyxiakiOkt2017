@@ -32,7 +32,14 @@ angular.module('companies').config(['uiGmapGoogleMapApiProvider', function (Goog
 	  $scope.routeCredentials = {};
 	  $scope.creCredentials = {};
 	  $scope.routeCre = {};
+	  $scope.litres1;
+	  $scope.litres2;
+	  $scope.litres3;
+	  $scope.disableViewOrders=true;
+	  $scope.disableViewOrders=true;
+	  $scope.disableViewOrders3=true;
 		$scope.companyDrivers = {};
+		$scope.companyTrucks = {};
 	  //create drivers
 	  $scope.routeCredentials.orders = [];
 	  $scope.drivercred ={
@@ -70,7 +77,8 @@ angular.module('companies').config(['uiGmapGoogleMapApiProvider', function (Goog
 				});
 		  
 	  };
-	  $scope.removeDriver = function(driver,alldrivers,ddriver){
+	  
+	    $scope.removeDriver = function(driver,alldrivers,ddriver){
 		
 			var value3=	$http.delete('/api/drivers/'+ driver);
 		value3.success(function(data, status, headers, config) {
@@ -82,6 +90,32 @@ angular.module('companies').config(['uiGmapGoogleMapApiProvider', function (Goog
 				});
 		
 	};
+	  
+	  //list the trucks of the company
+	   $scope.listTrucks = function(){
+		   var value1 = $http.get('api/companyTrucks?company='+$stateParams.companyId);
+		 // companyId: $stateParams.companyId
+		value1.success(function(data, status, headers, config) {
+					$scope.trucks = data;
+					//console.log($scope.company);
+				});
+		  
+	  };
+	    $scope.removeTruck = function(driver,alldrivers,ddriver){
+		
+			var value3=	$http.delete('/api/trucks/'+ driver);
+		value3.success(function(data, status, headers, config) {
+					  for (var i in alldrivers) {
+						  if (alldrivers[i] === ddriver) {
+							alldrivers.splice(i, 1);
+						  }
+					}
+				});
+		
+	};
+	  
+	  
+	
 	  //ypobolipratiriou
 	  //μαπΠρατηριο κοντρολερ
 	  
@@ -436,7 +470,35 @@ angular.module('companies').config(['uiGmapGoogleMapApiProvider', function (Goog
       });
     };
 	  
-	  
+	 $scope.truckcreation = function (isValid,form) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'TrucsForm');
+		
+        return false;
+      }
+
+			$scope.truckcred.company = $stateParams.companyId;
+
+      $http.post('/api/trucks', $scope.truckcred).success(function (response) {
+        // If successful we assign the response to the global user model
+       
+		
+	
+	   $scope.truckcred.firstName="";
+	    $scope.truckcred.model="";
+		 $scope.truckcred.size="";
+		  $scope.truckcred.trafficNumber="";
+		   $scope.truckcred.insuranceNumber="";
+		
+		 $scope.donedriver = "Το φορτηγό του πρατηρίου σας καταχωρήθηκε";
+       
+      }).error(function (response) {
+        $scope.error = response.message;
+      });
+	
+    };
 	  
 	  
 	  
@@ -943,7 +1005,7 @@ $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 			
 				$rootScope.orders = data;
 				//console.log("data einai "+JSON.stringify(data));
-				$rootScope.orders =$filter('filter')($rootScope.orders,{duedate:$scope.fdate1});
+				$rootScope.orders =$filter('filter')($rootScope.orders,{finished:false});
 				
 					//'Μεσημέρι(12-4)','Απόγευμα(4-8)'
 					$rootScope.gridOptions.data=$filter('filter')($rootScope.orders, {hour: 'Πρωί(8-12)'});
@@ -1006,6 +1068,12 @@ $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 		getdrivers.success(function(data, status, headers, config) {
 			$scope.companyDrivers = data;
 		},200);
+		
+		var getTrucks = $http.get('/api/companyTrucks?company='+$stateParams.companyId);
+		getTrucks.success(function(data, status, headers, config) {
+			$scope.companyTrucks = data;
+		},200);
+		
     };//console.log("eksw apo ti findone: "+ $scope.company);
 	
 	$scope.findForGuestUsers=function(){
@@ -1275,6 +1343,25 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 		  $scope.gridOptions.noUnselect = false;
 		  $scope.gridOptions.onRegisterApi = function( gridApi ) {
 			$scope.gridApi = gridApi;
+			$scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+				$scope.litres1=$scope.gridApi.grid.columns[2].getAggregationValue();
+				console.log($scope.gridApi.selection.getSelectedCount());
+				if($scope.gridApi.selection.getSelectedCount()>0){
+					  $scope.litres1=$scope.gridApi.grid.columns[2].getAggregationValue();
+					  if($scope.truck.size>= $scope.litres1){
+						  $scope.disableViewOrders = false;
+					  }else{
+						  $scope.disableViewOrders = true;
+						   $scope.hint1 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
+					  }
+
+				  }else{
+						$scope.litres1 = 0;
+						$scope.disableViewOrders = true;
+						 $scope.hint3 ="";
+					}
+				
+			});
 		  };
 	///////////////prwino grind
 	
@@ -1312,6 +1399,25 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
   $rootScope.gridOptions2.noUnselect = false;
  $rootScope.gridOptions2.onRegisterApi = function( gridApi ) {
     $scope.gridApi2 = gridApi;
+	$scope.gridApi2.selection.on.rowSelectionChanged($scope, function(row){
+		//console.log($scope.gridApi2.grid.columns[2].getAggregationValue());
+		if($scope.gridApi2.selection.getSelectedCount()>0){
+		  $scope.litres2=$scope.gridApi2.grid.columns[2].getAggregationValue();
+		  
+		  if($scope.truck.size>= $scope.litres2){
+						  $scope.disableViewOrders2 = false;
+			 }else{
+						  $scope.disableViewOrders2 = true;
+						   $scope.hint2 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
+		  }
+		  
+		  
+		}else{
+			$scope.litres2 = 0;
+			$scope.disableViewOrders2 = true;
+			 $scope.hint2 = "";
+		}
+	});
   };
 	/////////////mesimeriano grid
 	
@@ -1350,6 +1456,27 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
   $rootScope.gridOptions3.noUnselect = false;
   $rootScope.gridOptions3.onRegisterApi = function( gridApi ) {
     $scope.gridApi3 = gridApi;
+	$scope.gridApi3.selection.on.rowSelectionChanged($scope, function(row){
+		//console.log($scope.gridApi3.grid.columns[2].getAggregationValue());
+		
+		if($scope.gridApi3.selection.getSelectedCount()>0){
+		  $scope.litres3=$scope.gridApi3.grid.columns[2].getAggregationValue();
+		    if($scope.truck.size>= $scope.litres3){
+						  $scope.disableViewOrders3 = false;
+						  
+						  
+			 }else{
+						  $scope.disableViewOrders3 = true;
+						  $scope.hint3 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
+		  }
+		  
+		  
+		}else{
+			$scope.litres3 = 0;
+			$scope.disableViewOrders3 = true;
+			 $scope.hint3 = "";
+		}
+	});
   };
 	///////////apogeumatino grid
 	
@@ -1397,11 +1524,9 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 				 $rootScope.gridOptions1.data =  $scope.currentSelection;
 			}
 		
-			 if($scope.truck1){
-				 $scope.routetruck = 'big';
-			 }else if($scope.truck2){
-				 $scope.routetruck = 'small';
-			 }
+			// console.log("to id to truck einai"+$scope.truck._id+"to truck einai"+$scope.truck);
+			 $scope.routetruck = $scope.truck._id;
+			
 	};
 	//apo to plunker
 	
@@ -1436,16 +1561,7 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 			$scope.ordersSum1 =$scope.gridApi.grid.columns[3].getAggregationValue();
 			if($scope.ordersSum1===0){
 						$scope.prwinoHint ="Δεν υπάρχουν αλλες παραγγελίες για  την πρωινή ζώνη";
-				}else if($scope.ordersSum1<=$scope.track1){				
-						$scope.prwinoHint = "οι παραγγελίες της πρωινής ζώνης γίνονται με ένα δρομολόγιο  στο πρώτο φορτηγό";
-						//console.log("οι παραγγελίες της πρωινής ζώνης γίνονται με ένα δρομολόγιο  στο πρώτο φορτηγό");
-					}else if($scope.ordersSum1<= $scope.track1+$scope.track2){
-						$scope.prwinoHint = "οι παραγγελίες της πρωινης ζώνης χρειάζονται και το δεύτερο φορτηγό";
-						//console.log("οι παραγγελίες της πρωινης ζώνης χρειάζονται και το δεύτερο φορτηγό");
-					}else {
-						$scope.prwinoHint = "οι παραγγελίες της πρωινής ζώνης χρειάζονται παραπάνω απο ένα δρομολόγια";
-						//console.log("οι παραγγελίες της πρωινής ζώνης χρειάζονται παραπάνω απο ένα δρομολόγια");
-					}
+				}
 		//	
 	  
 				  
@@ -1454,16 +1570,7 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 				
 				if($scope.ordersSum2===0){
 						$scope.mesimeriHint ="Δεν υπάρχουν αλλες παραγγελίες για τη μεσημεριανής ζώνη";
-					}else if($scope.ordersSum2<=$scope.track1){
-						//console.log("οι παραγγελίες της μεσημεριανής ζώνης γίνονται με ένα δρομολόγιο  στο πρώτο φορτηγό");
-						$scope.mesimeriHint = "οι παραγγελίες της μεσημεριανής ζώνης γίνονται με ένα δρομολόγιο  στο πρώτο φορτηγό";
-					}else if($scope.ordersSum2<= $scope.track1+$scope.track2){
-						$scope.mesimeriHint="οι παραγγελίες της μεσημεριανής ζώνης χρειάζονται και το δεύτερο φορτηγό";
-					//	console.log("οι παραγγελίες της μεσημεριανής ζώνης χρειάζονται και το δεύτερο φορτηγό");
-					}else{
-						$scope.mesimeriHint="οι παραγγελίες της μεσημεριανής ζώνης χρειάζονται παραπάνω απο ένα δρομολόγια";
-						//console.log("οι παραγγελίες της μεσημεριανής ζώνης χρειάζονται παραπάνω απο ένα δρομολόγια");
-					} 
+					}
 		 // $scope.disably1 = false;
 	  
 		    angular.forEach($scope.currentSelection, function (data, index) {
@@ -1473,19 +1580,10 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 			$scope.ordersSum3 = $scope.gridApi3.grid.columns[3].getAggregationValue();
 			if($scope.ordersSum3===0){
 						$scope.apogeymaHint ="Δεν υπάρχουν αλλες παραγγελίες για  τη απογευματινή ζώνη";
-					}else if($scope.ordersSum3<=$scope.track1){
-						$scope.apogeymaHint="οι παραγγελίες της απογευματινής ζώνης γίνονται με ένα δρομολόγιο  στο πρώτο φορτηγό";
-						//console.log("οι παραγγελίες της απογευματινής ζώνης γίνονται με ένα δρομολόγιο  στο πρώτο φορτηγό");
-					}else if($scope.ordersSum3<= $scope.track1+$scope.track2){
-						$scope.apogeymaHint="οι παραγγελίες της απογευματινής ζώνης χρειάζονται και το δεύτερο φορτηγό";
-						console.log("οι παραγγελίες της απογευματινής ζώνης χρειάζονται και το δεύτερο φορτηγό");
-					}else{
-						$scope.apogeymaHint ="οι παραγγελίες της απογευματινής ζώνης χρειάζονται παραπάνω απο ένα δρομολόγια";
-						//console.log("οι παραγγελίες της απογευματινής ζώνης χρειάζονται παραπάνω απο ένα δρομολόγια");
 					}
 			//$scope.disably2 = false;
 	  
-	  if($scope.routetruck === 'big'||$scope.routetruck === 'small'&&bools){
+	 
 	   
 	  // $scope.creCredentials.orders = JSON.stringify($rootScope.gridOptions1.data);
 	   //$scope.creCredentials.lengthy = $rootScope.gridOptions1.data.length;
@@ -1520,9 +1618,7 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 		
 		});//varr2.successend
 		*/
-	 }//if truck1
-		$scope.truck1 = false;
-		$scope.truck2 = false;
+
     });// modalInstance then
 	  
 	  $scope.saveRoute = function(teCredentials,orders){

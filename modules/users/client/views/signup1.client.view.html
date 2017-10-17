@@ -88,6 +88,12 @@
           
         </span>
 		<span layout="row">
+		<label>ΑΦΜ</label>
+		 <md-input-container class="md-block" flex-gt-sm>
+			<input required ng-model="preUser.AFM"  ng-pattern="/^[0-9]{12}$/" md-maxlength="12">
+			</md-input-container>
+	</span>
+		<span layout="row">
 		<md-button class="md-raised md-accent" ng-click="showMap($event)" >Ελεγχος/Διορθωση Τοποθεσιας</md-button>
 		 <p style="margin-top:1em;" ng-bind="preUser.street"></p>
 		</span>

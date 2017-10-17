@@ -1,0 +1,78 @@
+<section ng-controller="CompaniesController" ng-init="findOne()" flex layout="row" layout-align="center center">
+
+<div style="margin:5em;opacity:0.9;" flex-sm="100"  flex-gt-sm="90" flex-gt-md="50" flex-gt-lg="40" class="md-whiteframe-17dp">
+  <md-toolbar>
+  <div style="background-color:#03A9F4;" class="md-toolbar-tools">
+            <h2><span >Καταχωρήστε Φορτηγό για το πρατήριο σας</span></h2>
+          </div>
+        </md-toolbar>
+  <md-content class="md-padding" >
+    
+      <form name="TrucksForm" novalidate>
+
+    
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Όνομα:</label>
+            <input type="text" id="" name="firstName" ng-model="truckcred.firstName" required>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Μοντέλο:</label>
+            <input type="text" id="model" name="model"  ng-model="truckcred.model" required>
+          </md-input-container>
+        </div>
+		
+	  <span layout-gt-sm="row">
+			<md-input-container  class="md-block" flex-gt-sm>
+				<label >Μέγεθος(λίτρα):</label>
+			<input type="number" id="size" name="size" ng-model="truckcred.size"   required>
+			
+				
+
+           
+		
+		  </span>
+	  
+	  
+       
+        
+
+        <span layout-gt-sm="row" >	
+			<md-input-container class="md-block" flex-gt-sm>
+          <label>Αριθμός Κυκλοφορίας:</label>
+      <input type="number" id="trafficNumber" name="trafficNumber"  ng-model="truckcred.trafficNumber" required>
+       
+		
+		</md-input-container>
+		
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Αριθμός Ασφάλισης:</label>
+            <input type="number" id="insuranceNumber" name="insuranceNumber"  ng-model="truckcred.insuranceNumber" required >
+			
+
+		 </md-input-container>
+
+        
+
+          
+        </span>
+		
+		
+		
+		  <md-button class="md-primary md-raised md-hue-1" type="submit" ng-click="truckcreation(TrucksForm.$valid,TrucksForm)"
+					>Καταχώρηση Φορτηγού</md-button>
+		  <div ng-show="error" class="text-center text-danger">
+	<strong ng-bind="error"></strong>
+	</div>
+	<div ng-show="donedriver" class="text-center text-danger">
+	<strong ng-bind="donedriver"></strong>
+	</div>	
+      </form>
+	 
+  </md-content>
+  </div>
+
+
+</section>

@@ -14,9 +14,11 @@
           <a ui-sref="companies.listDrivers({companyId: company._id})">Λίστα οδηγών</a>
         </li>
         <li ui-sref-active="active">
-          <a  ui-sref="companies.pending({companyId: company.companyname})">Ολες οι Παραγγελίες</a>
+          <a  ui-sref="companies.createTrucks({companyId: company._id})">Καταχώρηση Φορτηγών</a>
         </li>
-       
+       <li ui-sref-active="active" >
+          <a ui-sref="companies.listDrivers({companyId: company._id})" >Λίστα Φορτηγών</a>
+        </li>
         <li ui-sref-active="active" >
           <a ui-sref="companies.history({companyId: company.companyname})" >Ιστορικο Παραγγελιών</a>
         </li>
@@ -30,9 +32,7 @@
 		<li ui-sref-active="active" >
           <a  style="cursor:pointer" ng-click="thirdTab()" >Απογευματινης ζώνης Παραγγελίες</a>
         </li>
-		<li ui-sref-active="active" >
-          <a ui-sref="οδιγιες" >Βοήθεια</a>
-        </li>
+		
       </ul>
 	 
     </nav>
@@ -41,7 +41,7 @@
 		<md-tab label="Πρωινης Ζωνης Παραγγελίες">
 					<md-content class="md-padding">
 							<span class="row">
-									<label>Hμερομηνία παράδοσης:</label><span ng-bind="fdate1"></span>
+									
 									<span class="col-md-3" >
 												 
 												  <label for="company" class="control-label">Όνομα Οδηγού:</label>
@@ -51,18 +51,40 @@
 														</select>
 													</div>	
 									   </span>
-									   <span class="col-md-1"></span>
-									 <span  flex="50" class="col-md-2" style="padding-top:2em;">
-										  <md-checkbox ng-model="truck1" ng-click="checkbox1()" aria-label="Checkbox 1">
-										   Φορτηγό 1
-										  </md-checkbox>
+									   <span class="col-md-3"></span>
+									   
+									   <span class="col-md-3">
+									   <label style="margin-left:1em;">Hμερομηνία παράδοσης:</label><span ng-bind="fdate1"></span>
+									   </span>
 									</span>
-									<span  flex="50" class="col-md-2" style="padding-top:2em;">
-										  <md-checkbox ng-model="truck2" ng-click="checkbox2()" aria-label="Checkbox 2">
-										   Φορτηγό 2
-										  </md-checkbox>
-									</span>
-							</span>
+							<span class="row">
+										<span class="col-md-2" >
+												 
+												  <label for="company" class="control-label">Φορτηγό:</label>
+												   <div>
+													<select style="width:250px;" name="driver"  class="form-control" ng-model="truck"    ng-options="choice.firstName for choice in companyTrucks" >
+															<option value="" disabled selected>Διαλέξτε Φορτηγό</option>				
+														</select>
+													</div>	
+												
+									   </span>
+									      <span class="col-md-3"></span>
+									   
+									   <span class="col-md-3">
+									   	  <label style="margin-left:1em;" >Χωρητικότητα φορτηγού:</label>
+												   <span ng-bind="truck.size">
+							
+													</span>
+									    </span>
+										<span class="col-md-3">
+									   	  <label style="margin-left:1em;" >Λίτρα δρομολογίου:</label>
+												   <span ng-bind="litres1">
+							
+													</span>
+									    </span>
+                               </span>   								   
+								<p style="color:red;" ng-bind="hint1"></p>
+							
 							
 							<div style="width:100%;"  ui-grid="gridOptions" ui-grid-exporter ui-grid-selection  class="myGrid">
 								<div class="watermark" ng-bind="prwinoHint" style="position:absolute;top :80px;opacity: 0.25;font-size: 3em;width: 100%; text-align:center;z-index:1000;" ng-show="!gridOptions.data.length"></div>
@@ -70,52 +92,15 @@
 								
 							
 								
-							  <button ng-click="open('lg','prwini')" class="btn btn-info">Προβολή & δημιουργία δρομολογίου </button>
+							  <button ng-click="open('lg','prwini')" ng-disabled="disableViewOrders" class="btn btn-info">Προβολή & δημιουργία δρομολογίου </button>
 							  <button ng-click="saveRoute(routeCredentials,routeCre.orders)" class="btn btn-success" ng-disabled="disably">Αποθήκευση δρομολογίου </button>
 							  <button ng-click="cancelRoute1(routeCre.orders)" class="btn btn-warning" ng-disabled="disably">Ακυρωση δρομολογίου και επαναφορά παραγγελιών </button>
 					 </md-content>
 		  </md-tab>
 		  <md-tab label="Μεσημεριανης ζωνης Παραγγελίες">
 				<md-content class="md-padding">
-						 <span class="row">
-										<label>Hμερομηνία παράδοσης:</label><span ng-bind="fdate1"></span>
-										<span class="col-md-3" >
-													 
-													  <label for="company" class="control-label">Όνομα Οδηγού:</label>
-													   <div>
-														<select style="width:250px;" name="driver"  class="form-control" ng-model="driver"    ng-options="choice.displayName for choice in companyDrivers" >
-																<option value="" disabled selected>Διαλέξτε Οδηγό</option>				
-															</select>
-														</div>	
-										 </span>
-										 <span class="col-md-1"></span>
-										 <span  flex="50" class="col-md-2" style="padding-top:2em;">
-											  <md-checkbox ng-model="truck1" ng-click="checkbox1()" aria-label="Checkbox 1">
-											   Φορτηγό 1
-											  </md-checkbox>
-										 </span>
-										 <span  flex="50" class="col-md-2" style="padding-top:2em;">
-											  <md-checkbox ng-model="truck2" ng-click="checkbox2()" aria-label="Checkbox 2">
-											   Φορτηγό 2
-											  </md-checkbox>
-										 </span>
-						  </span>
-						  <div ui-grid="gridOptions2" ui-grid-selection ui-grid-exporter class="myGrid">
-							<div class="watermark" ng-bind="mesimeriHint" style="position:absolute;top :80px;opacity: 0.25;font-size: 3em;width: 100%; text-align:center;z-index:1000;" ng-show="!gridOptions2.data.length"></div>
-
-						  </div>
-						
-						  <button ng-click="open('lg','mesimeri')" class="btn btn-info">Προβολή & δημιουργία δρομολογίου </button>
-						  
-						  <button ng-click="saveRoute(routeCredentials,routeCre.orders)" class="btn btn-success" ng-disabled="disably1">Αποθήκευση δρομολογίου </button>
-					     <button ng-click="cancelRoute1(routeCre.orders)" class="btn btn-warning" ng-disabled="disably1">Ακυρωση δρομολογίου και επαναφορά παραγγελιών </button>
-					   
-				</md-content>
-			 </md-tab>
-		 <md-tab label="Aπογευματινής ζώνης Παραγγελίες">
-			<md-content class="md-padding">
-				 <span class="row">
-									 <label>Hμερομηνία παράδοσης:</label><span ng-bind="fdate1"></span>
+							<span class="row">
+									
 									<span class="col-md-3" >
 												 
 												  <label for="company" class="control-label">Όνομα Οδηγού:</label>
@@ -124,26 +109,105 @@
 															<option value="" disabled selected>Διαλέξτε Οδηγό</option>				
 														</select>
 													</div>	
+									   </span>
+									   <span class="col-md-3"></span>
+									   
+									   <span class="col-md-3">
+									   <label style="margin-left:1em;">Hμερομηνία παράδοσης:</label><span ng-bind="fdate1"></span>
+									   </span>
 									</span>
-									   <span class="col-md-1"></span>
-									 <span  flex="50" class="col-md-2" style="padding-top:2em;">
-										  <md-checkbox ng-model="truck1" ng-click="checkbox1()" aria-label="Checkbox 1">
-										   Φορτηγό 1
-										  </md-checkbox>
+							<span class="row">
+										<span class="col-md-2" >
+												 
+												  <label for="company" class="control-label">Φορτηγό:</label>
+												   <div>
+													<select style="width:250px;" name="driver"  class="form-control" ng-model="truck"    ng-options="choice.firstName for choice in companyTrucks" >
+															<option value="" disabled selected>Διαλέξτε Φορτηγό</option>				
+														</select>
+													</div>	
+												
+									   </span>
+									      <span class="col-md-3"></span>
+									   
+									   <span class="col-md-3">
+									   	  <label style="margin-left:1em;" >Χωρητικότητα φορτηγού:</label>
+												   <span ng-bind="truck.size">
+							
+													</span>
+									    </span>
+										<span class="col-md-3">
+									   	  <label style="margin-left:1em;" >Λίτρα δρομολογίου:</label>
+												   <span ng-bind="litres2">
+							
+													</span>
+									    </span>
+                               </span>
+							   <p style="color:red;" ng-bind="hint2"></p>
+						  <div ui-grid="gridOptions2" ui-grid-selection ui-grid-exporter class="myGrid">
+							<div class="watermark" ng-bind="mesimeriHint" style="position:absolute;top :80px;opacity: 0.25;font-size: 3em;width: 100%; text-align:center;z-index:1000;" ng-show="!gridOptions2.data.length"></div>
+
+						  </div>
+						
+						  <button ng-click="open('lg','mesimeri')" ng-disabled="disableViewOrders2" class="btn btn-info">Προβολή & δημιουργία δρομολογίου </button>
+						  
+						  <button ng-click="saveRoute(routeCredentials,routeCre.orders)" class="btn btn-success" ng-disabled="disably1">Αποθήκευση δρομολογίου </button>
+					     <button ng-click="cancelRoute1(routeCre.orders)" class="btn btn-warning" ng-disabled="disably1">Ακυρωση δρομολογίου και επαναφορά παραγγελιών </button>
+					   
+				</md-content>
+			 </md-tab>
+		 <md-tab label="Aπογευματινής ζώνης Παραγγελίες">
+			<md-content class="md-padding">
+				 	<span class="row">
+									
+									<span class="col-md-3" >
+												 
+												  <label for="company" class="control-label">Όνομα Οδηγού:</label>
+												   <div>
+													<select style="width:250px;" name="driver"  class="form-control" ng-model="driver"    ng-options="choice.displayName for choice in companyDrivers" >
+															<option value="" disabled selected>Διαλέξτε Οδηγό</option>				
+														</select>
+													</div>	
+									   </span>
+									   <span class="col-md-3"></span>
+									   
+									   <span class="col-md-3">
+									   <label style="margin-left:1em;">Hμερομηνία παράδοσης:</label><span ng-bind="fdate1"></span>
+									   </span>
 									</span>
-									<span  flex="50" class="col-md-2" style="padding-top:2em;">
-										  <md-checkbox ng-model="truck2" ng-click="checkbox2()" aria-label="Checkbox 2">
-										   Φορτηγό 2
-										  </md-checkbox>
-									</span>
-					</span>
+							<span class="row">
+										<span class="col-md-2" >
+												 
+												  <label for="company" class="control-label">Φορτηγό:</label>
+												   <div>
+													<select style="width:250px;" name="driver"  class="form-control" ng-model="truck"    ng-options="choice.firstName for choice in companyTrucks" >
+															<option value="" disabled selected>Διαλέξτε Φορτηγό</option>				
+														</select>
+													</div>	
+												
+									   </span>
+									      <span class="col-md-3"></span>
+									   
+									   <span class="col-md-3">
+									   	  <label style="margin-left:1em;" >Χωρητικότητα φορτηγού:</label>
+												   <span ng-bind="truck.size">
+							
+													</span>
+									    </span>
+										<span class="col-md-3">
+									   	  <label style="margin-left:1em;" >Λίτρα δρομολογίου:</label>
+												   <span ng-bind="litres3">
+							
+													</span>
+									    </span>
+                               </span>
+							   <p style="color:red;" ng-bind="hint3"></p>
 				  <div ui-grid="gridOptions3" ui-grid-selection ui-grid-exporter class="myGrid">
 					<div class="watermark" ng-bind="apogeymaHint" style="position:absolute;top :80px;opacity: 0.25;font-size: 3em;width: 100%; text-align:center;z-index:1000;" ng-show="!gridOptions3.data.length"></div>
 
 				  </div>
 				 
 					
-				  <button ng-click="open('lg','apogeyma')" class="btn btn-info">Προβολή & δημιουργία δρομολογίου </button>
+				  <button ng-click="open('lg','apogeyma')" ng-disabled="disableViewOrders3" class="btn btn-info">Προβολή & δημιουργία δρομολογίου </button>
 				  <button ng-click="saveRoute(routeCredentials,routeCre.orders)" class="btn btn-success" ng-disabled="disably2">Αποθήκευση δρομολογίου </button>
 				  <button ng-click="cancelRoute1(routeCre.orders)" class="btn btn-warning" ng-disabled="disably2">Ακυρωση δρομολογίου και επαναφορά παραγγελιών </button>
 				   

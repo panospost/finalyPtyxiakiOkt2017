@@ -20,14 +20,14 @@
 					<input   ng-model="phonenumber"  ng-pattern="/^[0-9]{10}$/"   name="phonenumber"    md-maxlength="10" required/>
 				  </md-input-container>
 				</div>
-				<div layout="row">
+				<div style="display:none;" layout="row">
 					<md-input-container class="md-block" flex-gt-sm>
 						<label>Xωρητικότητα 1ου φορτηγού σε λίτρα:</label>
-						<input type="number"  ng-model="truck1"     name="truck1"     required/>
+						<input type="number"  ng-model="truck1"     name="truck1" value="0"     required/>
 					  </md-input-container>
 					  <md-input-container class="md-block" flex-gt-sm>
 						<label>Xωρητικότητα 2ου φορτηγού σε λίτρα:</label>
-						<input   type="number" ng-model="truck2"     name="truck2"     required/>
+						<input   type="number" ng-model="truck2"     name="truck2"  value="0"   required/>
 					  </md-input-container>
 				 </div>
 				 <div layout="row">

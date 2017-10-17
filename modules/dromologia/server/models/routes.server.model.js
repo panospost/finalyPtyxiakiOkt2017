@@ -38,8 +38,9 @@ var RouteSchema = new Schema({
    
   },
   truck:{
-	  type:String,
-		  required:'truck is required'
+	  type: Schema.ObjectId,
+    ref: 'Truck',
+		  required:'truckId is required'
   },
   hour:{
 	  type:String 

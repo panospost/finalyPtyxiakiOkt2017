@@ -3,7 +3,7 @@
 	
 	<div  style="background-color:#03A9F4;" layout="row" layout-padding class="md-hue-3" layout-align="space-between center">
 <div>
-    <md-button ui-sref="home" ng-show="authentication.user.roles == 'user'||authentication.user.roles == 'admin'">Αρχικη</md-button>
+    <md-button ui-sref="home" ng-hide="authentication.user.roles == 'pratiriouxos'">Αρχικη</md-button>
 	<md-button ui-sref="companies.list2" ng-show="authentication.user.roles == 'pratiriouxos'">Αρχικη</md-button>
     <md-button ui-sref="home">Σχετικα με εμας</md-button>
     <md-button ui-sref="home" >Apps</md-button>	

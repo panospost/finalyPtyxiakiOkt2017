@@ -49,6 +49,9 @@ var UserSchema = new Schema({
     type: String,
     trim: true
   },
+  AFM:{
+	  type:Number
+  },
   email: {
     type: String,
     unique: 'Το email υπάρχει ήδη,δώστε άλλο email',

@@ -42,7 +42,16 @@ angular.module('companies').config(['$stateProvider',
         url: '/:companyId/edit',
         templateUrl: 'modules/companies/client/views/edit-company.client.view.html',
         
-      }).state('companies.createDrivers', {
+      }).state('companies.createTrucks', {
+        url: '/trucks/:companyId',
+        templateUrl: 'modules/companies/client/views/createTrucks.client.view.html',
+        
+      }).state('companies.listTrucks', {
+        url: '/listdrivers/:companyId',
+        templateUrl: 'modules/companies/client/views/listTrucks.client.view.html',
+        
+       })
+	  .state('companies.createDrivers', {
         url: '/drivers/:companyId',
         templateUrl: 'modules/companies/client/views/createdrivers.client.view.html',
         
