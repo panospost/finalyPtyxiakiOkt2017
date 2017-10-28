@@ -297,7 +297,8 @@ module.exports = function (grunt) {
   });
 	grunt.option("force", true);
   // Lint CSS and JavaScript files.
-  grunt.registerTask('lint', ['sass', 'less', 'jshint', 'eslint', 'csslint']);
+ // grunt.registerTask('lint', ['sass', 'less', 'jshint', 'eslint', 'csslint']);
+ grunt.registerTask('lint', [ 'eslint']);
 
   // Lint project files and minify them into two production files.
   grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);

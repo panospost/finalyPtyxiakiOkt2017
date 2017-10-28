@@ -41,6 +41,7 @@ angular.module('companies').config(['uiGmapGoogleMapApiProvider', function (Goog
 		$scope.companyDrivers = {};
 		$scope.companyTrucks = {};
 	  //create drivers
+	  $scope.truck = 'null';
 	  $scope.routeCredentials.orders = [];
 	  $scope.drivercred ={
 		  firstName:"",
@@ -513,23 +514,7 @@ angular.module('companies').config(['uiGmapGoogleMapApiProvider', function (Goog
 	  
 	  
 	  
-	  //τρακ τσεκμποξες
-	  $scope.checkbox2=function(){
-	  $scope.$watch('truck2', function(newVal, oldVal){
-			
-			if($scope.truck2===true){
-				$scope.truck1= false;
-			}
-		}, true);
-	  };
-	   $scope.checkbox1=function(){
-	  $scope.$watch('truck1', function(newVal, oldVal){
-			
-			if($scope.truck1===true){
-				$scope.truck2= false;
-			}
-		}, true);
-	  };
+
 	  
 	  
 	 
@@ -1344,21 +1329,39 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 		  $scope.gridOptions.onRegisterApi = function( gridApi ) {
 			$scope.gridApi = gridApi;
 			$scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
-				$scope.litres1=$scope.gridApi.grid.columns[2].getAggregationValue();
-				console.log($scope.gridApi.selection.getSelectedCount());
+				//$scope.litres1=$scope.gridApi.grid.columns[2].getAggregationValue();
+				//console.log($scope.gridApi.selection.getSelectedGridRows());
 				if($scope.gridApi.selection.getSelectedCount()>0){
-					  $scope.litres1=$scope.gridApi.grid.columns[2].getAggregationValue();
+					$scope.litres1 = 0;
+					$scope.hint1 = '';
+				
+					for(var x in $scope.gridApi.selection.getSelectedGridRows() )
+					{
+						var arr = $scope.gridApi.selection.getSelectedGridRows();
+						console.log(arr[x].entity.quantity);
+						$scope.litres1+=arr[x].entity.quantity;
+					}
+					 // $scope.litres1=$scope.gridApi.grid.columns[2].getAggregationValue();
 					  if($scope.truck.size>= $scope.litres1){
 						  $scope.disableViewOrders = false;
-					  }else{
+					  }else
+					  {
 						  $scope.disableViewOrders = true;
+						  if($scope.truck==='null')
+						  {
+								 $scope.hint1 = "Eπιλέξτε φορτηγό πρώτα";
+								 
+							}
+						  else
+						  {
 						   $scope.hint1 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
+						  }
 					  }
 
 				  }else{
 						$scope.litres1 = 0;
 						$scope.disableViewOrders = true;
-						 $scope.hint3 ="";
+						 $scope.hint1 ="";
 					}
 				
 			});
@@ -1402,14 +1405,30 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 	$scope.gridApi2.selection.on.rowSelectionChanged($scope, function(row){
 		//console.log($scope.gridApi2.grid.columns[2].getAggregationValue());
 		if($scope.gridApi2.selection.getSelectedCount()>0){
-		  $scope.litres2=$scope.gridApi2.grid.columns[2].getAggregationValue();
-		  
-		  if($scope.truck.size>= $scope.litres2){
+		 // $scope.litres2=$scope.gridApi2.grid.columns[2].getAggregationValue();
+         $scope.litres2 = 0;
+		  $scope.hint3='';
+					for(var x in $scope.gridApi2.selection.getSelectedGridRows() )
+					{
+						var arr = $scope.gridApi.selection.getSelectedGridRows();
+						//console.log(arr[x].entity.quantity);
+						$scope.litres2+=arr[x].entity.quantity;
+					}	
+			if($scope.truck.size>= $scope.litres2){
 						  $scope.disableViewOrders2 = false;
 			 }else{
-						  $scope.disableViewOrders2 = true;
+				 $scope.disableViewOrders2 = true;
+						  if($scope.truck==='null')
+						  {
+								 $scope.hint2 = "Eπιλέξτε φορτηγό πρώτα";
+								 
+							}
+						  else
+						  {
 						   $scope.hint2 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
-		  }
+						  }		  
+						  
+				}
 		  
 		  
 		}else{
@@ -1460,15 +1479,34 @@ $scope.companies = $http.get('/api/mobile/companies?longitude='+$localStorage.lo
 		//console.log($scope.gridApi3.grid.columns[2].getAggregationValue());
 		
 		if($scope.gridApi3.selection.getSelectedCount()>0){
-		  $scope.litres3=$scope.gridApi3.grid.columns[2].getAggregationValue();
+		  //$scope.litres3=$scope.gridApi3.grid.columns[2].getAggregationValue();
+		  
+		 $scope.litres3 = 0;
+		  $scope.hint3 = '';
+					for(var x in $scope.gridApi3.selection.getSelectedGridRows() )
+					{
+						var arr = $scope.gridApi.selection.getSelectedGridRows();
+						console.log(arr[x].entity.quantity);
+						$scope.litres3+=arr[x].entity.quantity;
+					} 
+		  
+		  
 		    if($scope.truck.size>= $scope.litres3){
 						  $scope.disableViewOrders3 = false;
 						  
 						  
 			 }else{
-						  $scope.disableViewOrders3 = true;
-						  $scope.hint3 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
-		  }
+					$scope.disableViewOrders3 = true;
+						  if($scope.truck==='null')
+						  {
+								 $scope.hint3 = "Eπιλέξτε φορτηγό πρώτα";
+								 
+							}
+						  else
+						  {
+						   $scope.hint3 = "Το μέγεθος του φορτηγού δεν επαρκεί για αυτές τις παραγγελίες";
+						  }
+				 }
 		  
 		  
 		}else{

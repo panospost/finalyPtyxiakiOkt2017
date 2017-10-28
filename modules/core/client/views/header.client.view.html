@@ -5,19 +5,19 @@
 <div>
     <md-button ui-sref="home" ng-hide="authentication.user.roles == 'pratiriouxos'">Αρχικη</md-button>
 	<md-button ui-sref="companies.list2" ng-show="authentication.user.roles == 'pratiriouxos'">Αρχικη</md-button>
-    <md-button ui-sref="home">Σχετικα με εμας</md-button>
-    <md-button ui-sref="home" >Apps</md-button>	
+    <md-button ui-sref="home1">Σχετικα με εμας</md-button>
+    <md-button ui-sref="home1" >Apps</md-button>	
     <md-menu>
         <md-button ui-sref="#" md-menu-origin ng-click="$mdOpenMenu()">Βοηθεια<i class="fa fa-arrow-down" aria-hidden="true"></i></md-button>
         <md-menu-content width="">
             <md-menu-item>
-                <md-button ui-sref="home" >Οδηγίες</md-button>
+                <md-button ui-sref="home1" >Οδηγίες</md-button>
             </md-menu-item>
 			<md-menu-item>
                 <md-button ui-sref="newMessage">Επικοινωνία με admin</md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button ui-sref="home">About</md-button>
+                <md-button ui-sref="home1">About</md-button>
             </md-menu-item>
         </md-menu-content>
     </md-menu>
